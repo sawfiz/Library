@@ -4,7 +4,6 @@ const newBookAuthorEl = document.querySelector("#author");
 const newBookPagesEl = document.querySelector("#pages");
 const newBookReadEl = document.querySelector("#read");
 const addBookBtnEl = document.querySelector("#addBookBtn");
-const readEls = Array.from(document.querySelectorAll(".read"));
 
 const library = [];
 
@@ -37,24 +36,30 @@ function addBookToDisplay(book) {
     const bookRead = document.createElement("td");
     const bookReadImg = document.createElement("img");
     bookRead.appendChild(bookReadImg);
-    bookReadImg.src = book.isread ? "images/check.svg" : "images/uncheck.svg";
+    bookReadImg.src = book.isRead ? "images/check.svg" : "images/uncheck.svg";
     bookRow.appendChild(bookRead);
 
+    // Toggle book read status and icon image when the icon is clicked on
     bookReadImg.addEventListener("click", () => {
-        if (book.isRead) {
-            bookReadImg.src = "images/uncheck.svg";
-            book.isRead = false;
-        } else {
-            bookReadImg.src = "images/check.svg";
-            book.isRead = true;
-        }
+        bookReadImg.src = book.isRead
+            ? "images/uncheck.svg"
+            : "images/check.svg";
+        book.isRead = book.isRead === true ? false : true;
     });
 
-    tableBodyEl.appendChild(bookRow);
-}
+    const bookRemove = document.createElement("td");
+    const bookRemoveImg = document.createElement("img");
+    bookRemoveImg.src = "images/remove.png";
+    bookRemove.appendChild(bookRemoveImg);
+    bookRow.appendChild(bookRemove);
 
-function changeReadStatus(book) {
-    book.isRead = book.isRead === true ? false : true;
+    bookRemoveImg.addEventListener("click", () => {
+        library.splice(library.indexOf(book), 1)
+        clearLibraryDisplay();
+        displayLibrary();
+    })
+
+    tableBodyEl.appendChild(bookRow);
 }
 
 function displayLibrary() {
@@ -67,7 +72,7 @@ function clearLibraryDisplay() {
     tableBodyEl.innerHTML = "";
     const headerRow = document.createElement("tr");
     headerRow.innerHTML =
-        "<tr><th>Index</th><th>Title</th><th>Author</th><th>Pages</th><th>Read</th></tr>";
+        "<tr><th>Title</th><th>Author</th><th>Pages</th><th>Read</th><th>Remove</th></tr>";
     tableBodyEl.appendChild(headerRow);
 }
 
@@ -80,14 +85,25 @@ function clearInputs() {
 
 // main program
 
-const lotr1 = new Book("LOTR1", "Tolkin", 344, false);
-const lotr2 = new Book("LOTR2", "Tolkin", 550, false);
-const lotr3 = new Book("LOTR3", "Tolkin", 263, false);
+const lotr1 = new Book("Lord of the Rings", "J. R. R.Tolkin", 9250, true);
+const lotr2 = new Book("A Game of Thrones", "George R. R. Martin", 694, false);
+const lotr3 = new Book(
+    "Harry Potter and the Deathly Hallows",
+    "J. K. Rowling",
+    607,
+    false
+);
+const lotr4 = new Book("LOTR1", "Tolkin", 344, true);
+const lotr5 = new Book("LOTR2", "Tolkin", 550, false);
+const lotr6 = new Book("LOTR3", "Tolkin", 263, false);
 
 addBookToLibrary(lotr1);
 addBookToLibrary(lotr2);
 addBookToLibrary(lotr3);
-changeReadStatus(lotr1);
+addBookToLibrary(lotr4);
+addBookToLibrary(lotr5);
+addBookToLibrary(lotr6);
+clearLibraryDisplay();
 displayLibrary();
 console.table(library);
 

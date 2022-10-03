@@ -5,9 +5,10 @@
     font-family: sans-serif;
 }
 
-body {}
+body {
+}
 
-.content-container{
+.content-container {
     display: flex;
 }
 
@@ -21,6 +22,52 @@ main {
 
 table {
     border: 1px solid #000;
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+tbody > tr > :nth-child(1) {
+    width: 60%;
+    text-align: left;
+}
+tbody > tr > :nth-child(2) {
+    width: 25%;
+    text-align: left;
+}
+tbody > tr > :nth-child(3) {
+    width: 5%;
+    text-align: right;
+}
+tbody > tr > :nth-child(4) {
+    width: 5%;
+    text-align: center;
+}
+tbody > tr > :nth-child(5) {
+    width: 5%;
+    text-align: center;
+}
+
+.col-text {
+    /* text-align: left; */
+    /* background: green; */
+}
+
+.col-num {
+    /* text-align: center; */
+    /* background: blue; */
+}
+
+.col-icon {
+    /* text-align: center; */
+    /* background: red; */
+}
+
+img {
+    width: 2rem;
+    cursor: pointer;
 }
 
 input:valid {
@@ -31,38 +78,23 @@ input:invalid {
     border-color: red;
 }
 
-.read {
-    background-image: url("images/check.svg");
-    background-size: cover;
-    background-position: center;
-    width: 1rem;
-    cursor: pointer;
-    border: 1px solid #000;
-}
-
-.unread {
-    background-image: url("images/uncheck.svg");
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
-    border: 1px solid #000;
-}
-
-/* tr {
-    height: 5rem;
-    padding: 3px;
-} */
-
 th {
-    font-size: 2rem;
+    font-size: 1.2rem;
     padding: 0.5rem;
-    border: 1px solid #000;
 }
 
 td {
-    font-size: 2rem;
-    padding: 0.2rem;
-    border: 1px solid #000;
+    font-size: 1rem;
+}
+
+th,
+td {
+    padding: 0.2rem 1rem;
+    border-bottom: 2px dotted #ddd;
+}
+
+tr:hover {
+    background-color:honeydew;
 }
 
 footer {
