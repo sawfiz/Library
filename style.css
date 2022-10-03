@@ -17,3 +17,7 @@ input:valid {
 input:invalid {
     border-color: red;
 }
+
+.read {
+    cursor: pointer;
+}
