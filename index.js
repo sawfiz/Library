@@ -21,27 +21,39 @@ function addBookToLibrary(book) {
 
 function addBookToDisplay(book) {
     const bookRow = document.createElement("tr");
+
     const bookTitle = document.createElement("td");
     bookTitle.innerText = book.title;
     bookRow.appendChild(bookTitle);
+
     const bookAuthor = document.createElement("td");
     bookAuthor.innerText = book.author;
     bookRow.appendChild(bookAuthor);
+
     const bookPages = document.createElement("td");
     bookPages.innerText = book.pages;
     bookRow.appendChild(bookPages);
+
     const bookRead = document.createElement("td");
-    bookRead.innerHTML = book.isRead === true ? '<img src="images/check.svg" class="read">' : '<img src="images/uncheck.svg" class="read">';
+    if (book.isRead) {
+        bookRead.classList.add("read")
+    } else {
+        bookRead.classList.add("unread")
+    }
     bookRow.appendChild(bookRead);
+
     bookRead.addEventListener("click", () => {
         if (book.isRead) {
-            bookRead.innerHTML = '<img src="images/uncheck.svg" class="read">'
+            bookRead.classList.remove("read")
+            bookRead.classList.add("unread")
             book.isRead = false
         } else {
-            bookRead.innerHTML = '<img src="images/check.svg" class="read">'
+            bookRead.classList.remove("unread")
+            bookRead.classList.add("read")
             book.isRead = true
         }
     })
+
     tableBodyEl.appendChild(bookRow);
 }
 
@@ -66,8 +78,8 @@ function clearLibraryDisplay() {
 function clearInputs() {
     newBookTitleEl.value = "";
     newBookAuthorEl.value = "";
-    newBookPagesEl.value = undefined;
-    newBookReadEl.value = false;
+    newBookPagesEl.value = 0;
+    newBookReadEl.checked = false;
 }
 
 
