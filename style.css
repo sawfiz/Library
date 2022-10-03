@@ -5,3 +5,15 @@ table {
 tr {
     border: 1px solid #000;
 }
+
+input {
+
+}
+
+input:valid {
+    border-color: green;
+}
+
+input:invalid {
+    border-color: red;
+}

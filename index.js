@@ -1,4 +1,9 @@
 const tableBodyEl = document.querySelector("tbody");
+const newBookTitleEl = document.querySelector("#title");
+const newBookAuthorEl = document.querySelector("#author");
+const newBookPagesEl = document.querySelector("#pages");
+const newBookReadEl = document.querySelector("#read");
+const addBookBtnEl = document.querySelector("#addBookBtn");
 
 const library = [];
 
@@ -17,7 +22,7 @@ function changeReadStatus(book) {
     book.isRead = book.isRead === true ? false : true;
 }
 
-function listBooksInLibrary() {
+function displayLibrary() {
     let index = 0;
     library.forEach((book) => {
         console.log(book);
@@ -42,7 +47,7 @@ function listBooksInLibrary() {
     });
 }
 
-function clearBooksList() {
+function clearLibraryDisplay() {
     tableBodyEl.innerHTML = "";
     const headerRow = document.createElement("tr");
     headerRow.innerHTML =
@@ -57,11 +62,16 @@ const lotr3 = new Book("LOTR3", "Tolkin", 263, false);
 addBookToLibrary(lotr1);
 addBookToLibrary(lotr2);
 addBookToLibrary(lotr3);
-
-listBooksInLibrary();
 changeReadStatus(lotr1);
-
-clearBooksList();
-
-listBooksInLibrary();
+displayLibrary();
 console.table(library);
+
+
+addBookBtnEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    const newBook = new Book(newBookTitleEl.value, newBookAuthorEl.value, newBookPagesEl.value, newBookReadEl.value);
+    addBookToLibrary(newBook);
+    console.log(newBookTitleEl);
+    clearLibraryDisplay();
+    displayLibrary();
+});
