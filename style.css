@@ -1,13 +1,26 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {}
+
+.content-container{
+    display: flex;
+}
+
+.sidebar {
+    flex: 3;
+}
+
+main {
+    flex: 5;
+}
+
 table {
     border: 1px solid #000;
-}
-
-tr {
-    border: 1px solid #000;
-}
-
-input {
-
 }
 
 input:valid {
@@ -20,12 +33,43 @@ input:invalid {
 
 .read {
     background-image: url("images/check.svg");
+    background-size: cover;
+    background-position: center;
+    width: 1rem;
     cursor: pointer;
     border: 1px solid #000;
 }
 
 .unread {
     background-image: url("images/uncheck.svg");
+    background-size: cover;
+    background-position: center;
     cursor: pointer;
     border: 1px solid #000;
+}
+
+/* tr {
+    height: 5rem;
+    padding: 3px;
+} */
+
+th {
+    font-size: 2rem;
+    padding: 0.5rem;
+    border: 1px solid #000;
+}
+
+td {
+    font-size: 2rem;
+    padding: 0.2rem;
+    border: 1px solid #000;
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    height: 1rem;
 }

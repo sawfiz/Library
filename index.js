@@ -4,7 +4,7 @@ const newBookAuthorEl = document.querySelector("#author");
 const newBookPagesEl = document.querySelector("#pages");
 const newBookReadEl = document.querySelector("#read");
 const addBookBtnEl = document.querySelector("#addBookBtn");
-const readEls = Array.from(document.querySelectorAll(".read"))
+const readEls = Array.from(document.querySelectorAll(".read"));
 
 const library = [];
 
@@ -35,24 +35,20 @@ function addBookToDisplay(book) {
     bookRow.appendChild(bookPages);
 
     const bookRead = document.createElement("td");
-    if (book.isRead) {
-        bookRead.classList.add("read")
-    } else {
-        bookRead.classList.add("unread")
-    }
+    const bookReadImg = document.createElement("img");
+    bookRead.appendChild(bookReadImg);
+    bookReadImg.src = book.isread ? "images/check.svg" : "images/uncheck.svg";
     bookRow.appendChild(bookRead);
 
-    bookRead.addEventListener("click", () => {
+    bookReadImg.addEventListener("click", () => {
         if (book.isRead) {
-            bookRead.classList.remove("read")
-            bookRead.classList.add("unread")
-            book.isRead = false
+            bookReadImg.src = "images/uncheck.svg";
+            book.isRead = false;
         } else {
-            bookRead.classList.remove("unread")
-            bookRead.classList.add("read")
-            book.isRead = true
+            bookReadImg.src = "images/check.svg";
+            book.isRead = true;
         }
-    })
+    });
 
     tableBodyEl.appendChild(bookRow);
 }
@@ -81,7 +77,6 @@ function clearInputs() {
     newBookPagesEl.value = 0;
     newBookReadEl.checked = false;
 }
-
 
 // main program
 
