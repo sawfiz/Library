@@ -66,12 +66,27 @@ changeReadStatus(lotr1);
 displayLibrary();
 console.table(library);
 
-
 addBookBtnEl.addEventListener("click", (e) => {
-    e.preventDefault();
-    const newBook = new Book(newBookTitleEl.value, newBookAuthorEl.value, newBookPagesEl.value, newBookReadEl.value);
-    addBookToLibrary(newBook);
-    console.log(newBookTitleEl);
-    clearLibraryDisplay();
-    displayLibrary();
+    if (
+        newBookTitleEl.value !== "" &&
+        newBookAuthorEl.value !== "" &&
+        newBookPagesEl.value > 1
+    ) {
+        const newBook = new Book(
+            newBookTitleEl.value,
+            newBookAuthorEl.value,
+            newBookPagesEl.value,
+            newBookReadEl.checked
+        );
+        addBookToLibrary(newBook);
+        console.log(newBookTitleEl);
+        clearLibraryDisplay();
+        displayLibrary();
+        newBookTitleEl.value = "";
+        newBookAuthorEl.value = "";
+        newBookPagesEl.value = undefined;
+    } else {
+        e.preventDefault();
+
+    }
 });
