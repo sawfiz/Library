@@ -5,13 +5,13 @@ const newBookPagesEl = document.querySelector("#pages");
 const newBookReadEl = document.querySelector("#read");
 const addBookBtnEl = document.querySelector("#addBookBtn");
 const addBookImgEl = document.querySelector(".addBookImg");
-const formContainerEl = document.querySelector(".form-container");
-const cancelBtnEl = document.querySelector("#cancelBtn")
+const formEl = document.querySelector("form");
+const cancelBtnEl = document.querySelector("#cancelBtn");
 
-const sortTitleEl = document.querySelector("#sort-title")
-const sortAuthorEl = document.querySelector("#sort-author")
-const sortPagesEl = document.querySelector("#sort-pages")
-const sortReadEl = document.querySelector("#sort-read")
+const sortTitleEl = document.querySelector("#sort-title");
+const sortAuthorEl = document.querySelector("#sort-author");
+const sortPagesEl = document.querySelector("#sort-pages");
+const sortReadEl = document.querySelector("#sort-read");
 
 const library = [];
 
@@ -63,7 +63,7 @@ function addBookToDisplay(book) {
     bookEdit.appendChild(bookEditImg);
     bookRow.appendChild(bookEdit);
     bookEditImg.addEventListener("click", () => {
-        formContainerEl.classList.add("show");
+        formEl.classList.add("show");
         console.log(book);
 
         newBookTitleEl.value = book.title;
@@ -74,7 +74,6 @@ function addBookToDisplay(book) {
         library.splice(library.indexOf(book), 1);
     });
 
-    // const bookRemove = document.createElement("td");
     const bookRemoveImg = document.createElement("img");
     bookRemoveImg.src = "images/remove.png";
     bookEdit.appendChild(bookRemoveImg);
@@ -95,13 +94,7 @@ function displayLibrary() {
     });
 }
 
-function sortByKey(array, key) {
-    return array.sort(function (a, b) {
-        var x = a[key];
-        var y = b[key];
-        return x < y ? -1 : x > y ? 1 : 0;
-    });
-}
+
 
 function clearLibraryDisplay() {
     tableBodyEl.innerHTML = "";
@@ -186,7 +179,7 @@ addBookBtnEl.addEventListener("click", (e) => {
         addBookToLibrary(newBook);
         addBookToDisplay(newBook);
         clearInputs();
-        formContainerEl.classList.remove("show");
+        formEl.classList.remove("show");
         clearLibraryDisplay();
         displayLibrary();
     } else {
@@ -195,31 +188,77 @@ addBookBtnEl.addEventListener("click", (e) => {
 });
 
 cancelBtnEl.addEventListener("click", () => {
-    formContainerEl.classList.remove("show");
+    formEl.classList.remove("show");
     clearInputs();
-})
-
-addBookImgEl.addEventListener("click", () => {
-    formContainerEl.classList.add("show");
 });
 
+addBookImgEl.addEventListener("click", () => {
+    formEl.classList.add("show");
+});
+
+// Sort buttons
+let sortTitleDirection = "ascend";
+let sortAuthorDirection = "ascend";
+let sortPagesDirection = "ascend";
+let sortReadDirection = "ascend";
+
 sortTitleEl.addEventListener("click", () => {
-    sortByKey(library, "title")
+    if (sortTitleDirection === "ascend") {
+        sortByKey(library, "title");
+        sortTitleDirection = "descend";
+    } else {
+        reverseSortByKey(library, "title");
+        sortTitleDirection = "ascend";
+    }
     clearLibraryDisplay();
     displayLibrary();
-})
+});
 sortAuthorEl.addEventListener("click", () => {
-    sortByKey(library, "author")
+    if (sortAuthorDirection === "ascend") {
+        sortByKey(library, "author");
+        sortAuthorDirection = "descend";
+    } else {
+        reverseSortByKey(library, "author");
+        sortAuthorDirection = "ascend";
+    }
     clearLibraryDisplay();
     displayLibrary();
-})
+});
 sortPagesEl.addEventListener("click", () => {
-    sortByKey(library, "pages")
+    if (sortPagesDirection === "ascend") {
+        sortByKey(library, "pages");
+        sortPagesDirection = "descend";
+    } else {
+        reverseSortByKey(library, "pages");
+        sortPagesDirection = "ascend";
+    }
     clearLibraryDisplay();
     displayLibrary();
-})
+});
 sortReadEl.addEventListener("click", () => {
-    sortByKey(library, "isRead")
+    if (sortReadDirection === "ascend") {
+        sortByKey(library, "isRead");
+        sortReadDirection = "descend";
+    } else {
+        reverseSortByKey(library, "isRead");
+        sortReadDirection = "ascend";
+    }
     clearLibraryDisplay();
     displayLibrary();
-})
+});
+
+function sortByKey(array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return x < y ? -1 : x > y ? 1 : 0;
+    });
+}
+
+function reverseSortByKey(array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return x > y ? -1 : x < y ? 1 : 0;
+    });
+}

@@ -62,15 +62,16 @@ th {
     position: sticky;
     top: 7.9rem;
     background-color: #ecb390;
-    padding: 0.5rem 0;
-    margin: 0.5rem 0;
     font-size: 1.4rem;
+}
+
+.sort-img {
+    width: 1.5rem;
 }
 
 .align-left {
     text-align: left;
     padding-left: 0.5rem;
-    /* vertical-align: baseline; */
 }
 
 .align-right {
@@ -119,7 +120,6 @@ tbody > tr > :nth-child(5) {
 img {
     width: 2rem;
     cursor: pointer;
-    border: 1px solid #000;
 }
 
 td {
@@ -143,29 +143,22 @@ p {
 }
 
 /* Form */
-.form-container {
-    display: none;
-}
-
-.form-container.show {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #000;
-}
 
 form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
     background: #ecb390;
     padding: 1rem;
     border-radius: 5%;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-    position: absolute;
-    width: 50%;
-    
+}
+
+form.show {
+    display: block;
 }
 
 h2 {
