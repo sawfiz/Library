@@ -8,6 +8,11 @@ const addBookImgEl = document.querySelector(".addBookImg");
 const formContainerEl = document.querySelector(".form-container");
 const cancelBtnEl = document.querySelector("#cancelBtn")
 
+const sortTitleEl = document.querySelector("#sort-title")
+const sortAuthorEl = document.querySelector("#sort-author")
+const sortPagesEl = document.querySelector("#sort-pages")
+const sortReadEl = document.querySelector("#sort-read")
+
 const library = [];
 
 function Book(title, author, pages, isRead) {
@@ -69,11 +74,11 @@ function addBookToDisplay(book) {
         library.splice(library.indexOf(book), 1);
     });
 
-    const bookRemove = document.createElement("td");
+    // const bookRemove = document.createElement("td");
     const bookRemoveImg = document.createElement("img");
     bookRemoveImg.src = "images/remove.png";
-    bookRemove.appendChild(bookRemoveImg);
-    bookRow.appendChild(bookRemove);
+    bookEdit.appendChild(bookRemoveImg);
+    bookRow.appendChild(bookEdit);
 
     bookRemoveImg.addEventListener("click", () => {
         library.splice(library.indexOf(book), 1);
@@ -85,7 +90,6 @@ function addBookToDisplay(book) {
 }
 
 function displayLibrary() {
-    sortByKey(library, "title");
     library.forEach((book) => {
         addBookToDisplay(book);
     });
@@ -198,3 +202,24 @@ cancelBtnEl.addEventListener("click", () => {
 addBookImgEl.addEventListener("click", () => {
     formContainerEl.classList.add("show");
 });
+
+sortTitleEl.addEventListener("click", () => {
+    sortByKey(library, "title")
+    clearLibraryDisplay();
+    displayLibrary();
+})
+sortAuthorEl.addEventListener("click", () => {
+    sortByKey(library, "author")
+    clearLibraryDisplay();
+    displayLibrary();
+})
+sortPagesEl.addEventListener("click", () => {
+    sortByKey(library, "pages")
+    clearLibraryDisplay();
+    displayLibrary();
+})
+sortReadEl.addEventListener("click", () => {
+    sortByKey(library, "isRead")
+    clearLibraryDisplay();
+    displayLibrary();
+})

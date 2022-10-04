@@ -38,6 +38,11 @@ h1 {
     font-weight: bold;
 }
 
+.addBookImg {
+    width: 60px;
+}
+
+
 /* main */
 main {
 }
@@ -62,6 +67,22 @@ th {
     font-size: 1.4rem;
 }
 
+.align-left {
+    text-align: left;
+    padding-left: 0.5rem;
+    /* vertical-align: baseline; */
+}
+
+.align-right {
+    text-align: right;
+    padding-right: 0.5rem;
+}
+
+.aligh-center {
+    text-align: center;
+    padding: 0px;
+}
+
 tr:nth-child(odd) {
     background-color: #cee5d0;
 }
@@ -71,30 +92,34 @@ tr:first-child {
 }
 
 tbody > tr > :nth-child(1) {
-    width: 60%;
+    width: 40%;
     text-align: left;
+    padding: 0.5rem;
     font-weight: bold;
 }
 tbody > tr > :nth-child(2) {
-    width: 25%;
+    width: 20%;
     text-align: left;
+    padding: 0.5rem;
 }
 tbody > tr > :nth-child(3) {
-    width: 5%;
+    width: 15%;
     text-align: right;
+    padding-right: 0.2rem;
 }
 tbody > tr > :nth-child(4) {
-    width: 5%;
+    width: 15%;
     text-align: center;
 }
 tbody > tr > :nth-child(5) {
-    width: 5%;
+    width: 15%;
     text-align: center;
 }
 
 img {
     width: 2rem;
     cursor: pointer;
+    border: 1px solid #000;
 }
 
 td {
@@ -104,7 +129,7 @@ td {
 
 th,
 td {
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 0;
     border-bottom: 2px dashed #ddd;
 }
 
@@ -112,9 +137,6 @@ tr:hover {
     background-color: honeydew;
 }
 
-.addBookImg {
-    width: 60px;
-}
 
 p {
     padding: 5rem;
