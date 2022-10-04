@@ -1,3 +1,6 @@
+
+@import url("https://fonts.googleapis.com/css?family=Architects+Daughter");
+
 * {
     margin: 0px;
     padding: 0px;
@@ -14,20 +17,29 @@ body {
     width: clamp(400px, 100%, 1000px);
     margin: auto;
     position: relative;
+    min-height: 100vh;
 }
 
 header {
+    background: #fcf8e8;
     width: clamp(400px, 80%, 1000px);
     height: 8rem;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+h1 {
+    font-family: "Architects Daughter";
+    font-weight: bold;
 }
 
 /* main */
 main {
-    height: 100vh;
 }
 
 .logo {
@@ -35,10 +47,19 @@ main {
 }
 
 table {
-    border: 1px solid #000;
     border-collapse: collapse;
     width: clamp(400px, 80%, 1000px);
     margin: auto;
+    position: relative;
+}
+
+th {
+    position: sticky;
+    top: 7.9rem;
+    background-color: #ecb390;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    font-size: 1.4rem;
 }
 
 tr:nth-child(odd) {
@@ -52,6 +73,7 @@ tr:first-child {
 tbody > tr > :nth-child(1) {
     width: 60%;
     text-align: left;
+    font-weight: bold;
 }
 tbody > tr > :nth-child(2) {
     width: 25%;
@@ -75,19 +97,15 @@ img {
     cursor: pointer;
 }
 
-th {
-    font-size: 1.2rem;
-    padding: 0.5rem;
-}
-
 td {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-family: "Architects Daughter";
 }
 
 th,
 td {
     padding: 0.2rem 1rem;
-    border-bottom: 2px dotted #ddd;
+    border-bottom: 2px dashed #ddd;
 }
 
 tr:hover {
@@ -96,6 +114,10 @@ tr:hover {
 
 .addBookImg {
     width: 60px;
+}
+
+p {
+    padding: 5rem;
 }
 
 /* Form */
@@ -120,7 +142,12 @@ form {
     border-radius: 5%;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
     position: absolute;
+    width: 50%;
+    
+}
 
+h2 {
+    font-size: 2rem;
 }
 
 fieldset {
@@ -134,11 +161,15 @@ fieldset {
     margin: 0.5rem;
 }
 label {
-    flex: 3;
+    flex: 2;
     padding-right: 1rem;
+    font-family: "Architects Daughter";
+    font-size: 1.5rem;
 }
 input {
     flex: 5;
+    font-size: 1rem;
+    padding-left: 0.5rem;
 }
 
 input:valid {

@@ -24,14 +24,21 @@
             </header>
             <table>
                 <tbody>
-                    <colgroup>
-                        <col span="2" class="col-text">
-                        <col class="col-num">
-                        <col class="col-icon">
-                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Pages</th>
+                            <th>Read</th>
+                            <th>&nbsp</th>
+                            <th>&nbsp</th>
+                        </tr>
+                    </thead>
+
                     <!-- library table goes here -->
                 </tbody>
             </table>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorem amet commodi vitae, voluptates ipsum aspernatur veritatis eveniet, magni exercitationem earum fugit cupiditate omnis voluptatibus error assumenda quis corrupti necessitatibus.</p>
         </main>
 
         <div class="form-container">
@@ -52,15 +59,20 @@
                     </div>
                     <div class="entry-line">
                         <label for="read">Read</label>
-                        <input type="checkbox" name="read" id="read">
+                        <select name="read" id="read">
+                            <option value="true">Yes</option>
+                            <option value="fals">No</option>
+
+                        </select>
                     </div>
                 </fieldset>
-                <button id="addBookBtn" type="submit">Add to library</button>
+                <button id="cancelBtn">Cancel</button>
+                <button id="addBookBtn" type="submit">Confirm</button>
             </form>
         </div>
 
+        <footer>Copyright &copy; sawfiz@github</footer>
     </div>
-    <footer>Copyright &copy; sawfiz@github</footer>
     <script src="index.js"></script>
 </body>
 
