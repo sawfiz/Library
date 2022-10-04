@@ -5,6 +5,7 @@ const newBookPagesEl = document.querySelector("#pages");
 const newBookReadEl = document.querySelector("#read");
 const addBookBtnEl = document.querySelector("#addBookBtn");
 const addBookImgEl = document.querySelector(".addBookImg");
+
 const formEl = document.querySelector("form");
 const cancelBtnEl = document.querySelector("#cancelBtn");
 
@@ -13,14 +14,20 @@ const sortAuthorEl = document.querySelector("#sort-author");
 const sortPagesEl = document.querySelector("#sort-pages");
 const sortReadEl = document.querySelector("#sort-read");
 
+const deleteAlertEl = document.querySelector(".alert")
+const deleteBookTitleEl = document.querySelector("#book-title")
+const deleteCancelBtnEl = document.querySelector("#delete-cancel")
+const deleteConfirmBtnEl = document.querySelector("#delete-confirm")
+
 const library = [];
+let bookToDelete = undefined;
 
 function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
-}
+} 
 
 function addBookToLibrary(book) {
     library.push(book);
@@ -80,9 +87,9 @@ function addBookToDisplay(book) {
     bookRow.appendChild(bookEdit);
 
     bookRemoveImg.addEventListener("click", () => {
-        library.splice(library.indexOf(book), 1);
-        clearLibraryDisplay();
-        displayLibrary();
+        deleteAlertEl.classList.add("show")
+        deleteBookTitleEl.innerText = book.title
+        bookToDelete = book;
     });
 
     tableBodyEl.appendChild(bookRow);
@@ -263,3 +270,18 @@ function reverseSortByKey(array, key) {
         return x > y ? -1 : x < y ? 1 : 0;
     });
 }
+
+
+// Confirm deletion
+deleteCancelBtnEl.addEventListener("click", () => {
+    deleteAlertEl.classList.remove("show");
+});
+
+deleteConfirmBtnEl.addEventListener("click", () => {
+    deleteFlag = true;
+    deleteAlertEl.classList.remove("show");
+    library.splice(library.indexOf(bookToDelete), 1);
+    bookToDelete = undefined;
+    clearLibraryDisplay();
+    displayLibrary();
+});

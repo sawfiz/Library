@@ -134,10 +134,7 @@ tr:hover {
 }
 
 
-p {
-    padding: 5rem 0;
-    text-align: center;
-}
+
 
 /* Form */
 
@@ -166,7 +163,7 @@ h2 {
 fieldset {
     background: #cee5d0;
     padding: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     color: #111;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
@@ -195,9 +192,15 @@ input:invalid {
     border-color: red;
 }
 
+.button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
 button {
     background: #94b49f;
     padding: 0.3rem 1rem;
+    margin: 1rem;
     border: none;
     border-radius: 5px;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
@@ -205,16 +208,36 @@ button {
     font-weight: bold;
 }
 
-#cancelBtn {
-    position: absolute;
-    left: 2rem;
-    bottom: 1.5rem;
+.alert {
+    display: none;
+    position: fixed;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
+    background: #ecb390;
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 5%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-#addBookBtn {
-    position: absolute;
-    right: 2rem;
-    bottom: 1.5rem;
+.alert.show {
+    display: block;
+}
+
+.delete-alert-container {
+    background-color: #cee5d0;
+    height: 5rem;
+}
+
+p {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+#book-title {
+    font-weight: bold;
 }
 
 footer {

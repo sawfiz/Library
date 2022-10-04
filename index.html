@@ -71,9 +71,21 @@
                     </select>
                 </div>
             </fieldset>
-            <button id="cancelBtn">Cancel</button>
-            <button id="addBookBtn" type="submit">Confirm</button>
+            <div class="button-container">
+                <button id="cancelBtn">Cancel</button>
+                <button id="addBookBtn" type="submit">Confirm</button>
+            </div>
         </form>
+
+        <div class="alert">
+            <div class="delete-alert-container">
+                <p>Please confirm that you'd like to delete the book <span id="book-title"></span></p>
+            </div>
+            <div class="button-container">
+                <button id="delete-cancel">Cancel</button>
+                <button id="delete-confirm">Confirm</button>
+            </div>
+        </div>
 
         <footer>Copyright &copy; sawfiz@github</footer>
     </div>
