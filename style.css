@@ -6,28 +6,48 @@
 }
 
 body {
+    background: #94b49f;
 }
 
 .content-container {
+    background: #fcf8e8;
+    width: clamp(400px, 100%, 1000px);
+    margin: auto;
+    position: relative;
+}
+
+header {
+    width: clamp(400px, 80%, 1000px);
+    height: 8rem;
+    margin: auto;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.sidebar {
-    flex: 3;
-}
-
+/* main */
 main {
-    flex: 5;
+    height: 100vh;
+}
+
+.logo {
+    width: 80px;
 }
 
 table {
     border: 1px solid #000;
     border-collapse: collapse;
-    width: 80%;
+    width: clamp(400px, 80%, 1000px);
     margin: auto;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(odd) {
+    background-color: #cee5d0;
+}
+
+tr:first-child {
+    background-color: #ecb390;
+}
 
 tbody > tr > :nth-child(1) {
     width: 60%;
@@ -50,32 +70,9 @@ tbody > tr > :nth-child(5) {
     text-align: center;
 }
 
-.col-text {
-    /* text-align: left; */
-    /* background: green; */
-}
-
-.col-num {
-    /* text-align: center; */
-    /* background: blue; */
-}
-
-.col-icon {
-    /* text-align: center; */
-    /* background: red; */
-}
-
 img {
     width: 2rem;
     cursor: pointer;
-}
-
-input:valid {
-    border-color: green;
-}
-
-input:invalid {
-    border-color: red;
 }
 
 th {
@@ -94,7 +91,74 @@ td {
 }
 
 tr:hover {
-    background-color:honeydew;
+    background-color: honeydew;
+}
+
+.addBookImg {
+    width: 60px;
+}
+
+/* Form */
+.form-container {
+    display: none;
+}
+
+.form-container.show {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+}
+
+form {
+    background: #ecb390;
+    padding: 1rem;
+    border-radius: 5%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+    position: absolute;
+
+}
+
+fieldset {
+    background: #cee5d0;
+    padding: 1rem;
+    margin-bottom: 3rem;
+}
+
+.entry-line {
+    display: flex;
+    margin: 0.5rem;
+}
+label {
+    flex: 3;
+    padding-right: 1rem;
+}
+input {
+    flex: 5;
+}
+
+input:valid {
+    border-color: green;
+}
+
+input:invalid {
+    border-color: red;
+}
+
+#addBookBtn {
+    background: #94b49f;
+    padding: 0.3rem 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    bottom: 1.5rem;
 }
 
 footer {

@@ -4,6 +4,8 @@ const newBookAuthorEl = document.querySelector("#author");
 const newBookPagesEl = document.querySelector("#pages");
 const newBookReadEl = document.querySelector("#read");
 const addBookBtnEl = document.querySelector("#addBookBtn");
+const addBookImgEl = document.querySelector(".addBookImg")
+const formContainerEl = document.querySelector(".form-container")
 
 const library = [];
 
@@ -36,16 +38,22 @@ function addBookToDisplay(book) {
     const bookRead = document.createElement("td");
     const bookReadImg = document.createElement("img");
     bookRead.appendChild(bookReadImg);
-    bookReadImg.src = book.isRead ? "images/check.svg" : "images/uncheck.svg";
+    bookReadImg.src = book.isRead ? "images/icons8-checked-checkbox-96.png" : "images/icons8-process-96.png";
     bookRow.appendChild(bookRead);
 
     // Toggle book read status and icon image when the icon is clicked on
     bookReadImg.addEventListener("click", () => {
         bookReadImg.src = book.isRead
-            ? "images/uncheck.svg"
-            : "images/check.svg";
+            ? "images/icons8-process-96.png"
+            : "images/icons8-checked-checkbox-96.png";
         book.isRead = book.isRead === true ? false : true;
     });
+
+    const bookEdit = document.createElement("td");
+    const bookEditImg = document.createElement("img");
+    bookEditImg.src = "images/icons8-compose-96.png";
+    bookEdit.appendChild(bookEditImg);
+    bookRow.appendChild(bookEdit);
 
     const bookRemove = document.createElement("td");
     const bookRemoveImg = document.createElement("img");
@@ -72,14 +80,14 @@ function clearLibraryDisplay() {
     tableBodyEl.innerHTML = "";
     const headerRow = document.createElement("tr");
     headerRow.innerHTML =
-        "<tr><th>Title</th><th>Author</th><th>Pages</th><th>Read</th><th>Remove</th></tr>";
+        "<tr><th>Title</th><th>Author</th><th>Pages</th><th>Read</th><th>&nbsp</th><th>&nbsp</th></tr>";
     tableBodyEl.appendChild(headerRow);
 }
 
 function clearInputs() {
     newBookTitleEl.value = "";
     newBookAuthorEl.value = "";
-    newBookPagesEl.value = 0;
+    newBookPagesEl.value = undefined;
     newBookReadEl.checked = false;
 }
 
@@ -122,7 +130,13 @@ addBookBtnEl.addEventListener("click", (e) => {
         addBookToLibrary(newBook);
         addBookToDisplay(newBook);
         clearInputs();
+        formContainerEl.classList.remove("show")
     } else {
         e.preventDefault();
     }
 });
+
+addBookImgEl.addEventListener("click", () => {
+    formContainerEl.classList.add("show")
+
+})
