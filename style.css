@@ -165,7 +165,7 @@ fieldset {
     padding: 1rem;
     margin-bottom: 1rem;
     color: #111;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); */
 }
 
 .entry-line {
@@ -198,7 +198,7 @@ input:invalid {
 }
 
 button {
-    background: #94b49f;
+    background: #94d4f6;
     padding: 0.3rem 1rem;
     margin: 1rem;
     border: none;
