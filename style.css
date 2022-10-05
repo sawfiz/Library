@@ -39,6 +39,7 @@ header {
 
 .logo {
   width: 80px;
+  pointer-events: none;
 }
 
 h1 {
