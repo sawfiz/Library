@@ -112,6 +112,10 @@ img {
   cursor: pointer;
 }
 
+img.active {
+  transform: translateY(5%);
+}
+
 td {
   font-size: 1.2rem;
   font-family: 'Architects Daughter';
