@@ -14,20 +14,20 @@ const sortAuthorEl = document.querySelector("#sort-author");
 const sortPagesEl = document.querySelector("#sort-pages");
 const sortReadEl = document.querySelector("#sort-read");
 
-const deleteAlertEl = document.querySelector(".alert")
-const deleteBookTitleEl = document.querySelector("#book-title")
-const deleteCancelBtnEl = document.querySelector("#delete-cancel")
-const deleteConfirmBtnEl = document.querySelector("#delete-confirm")
+const deleteAlertEl = document.querySelector(".alert");
+const deleteBookTitleEl = document.querySelector("#book-title");
+const deleteCancelBtnEl = document.querySelector("#delete-cancel");
+const deleteConfirmBtnEl = document.querySelector("#delete-confirm");
 
 const library = [];
-let bookToDelete = undefined;
+let bookToDelete;
 
 function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
-} 
+}
 
 function addBookToLibrary(book) {
     library.push(book);
@@ -61,7 +61,7 @@ function addBookToDisplay(book) {
         bookReadImg.src = book.isRead
             ? "images/icons8-process-96.png"
             : "images/icons8-checked-checkbox-96.png";
-        book.isRead = book.isRead === true ? false : true;
+        book.isRead = book.isRead !== true;
     });
 
     const bookEdit = document.createElement("td");
@@ -71,7 +71,6 @@ function addBookToDisplay(book) {
     bookRow.appendChild(bookEdit);
     bookEditImg.addEventListener("click", () => {
         formEl.classList.add("show");
-        console.log(book);
 
         newBookTitleEl.value = book.title;
         newBookAuthorEl.value = book.author;
@@ -87,8 +86,8 @@ function addBookToDisplay(book) {
     bookRow.appendChild(bookEdit);
 
     bookRemoveImg.addEventListener("click", () => {
-        deleteAlertEl.classList.add("show")
-        deleteBookTitleEl.innerText = book.title
+        deleteAlertEl.classList.add("show");
+        deleteBookTitleEl.innerText = book.title;
         bookToDelete = book;
     });
 
@@ -101,8 +100,6 @@ function displayLibrary() {
     });
 }
 
-
-
 function clearLibraryDisplay() {
     tableBodyEl.innerHTML = "";
     const headerRow = document.createElement("tr");
@@ -114,6 +111,22 @@ function clearInputs() {
     newBookAuthorEl.value = "";
     newBookPagesEl.value = undefined;
     newBookReadEl.checked = false;
+}
+
+function sortByKey(array, key) {
+    return array.sort((a, b) => {
+        const x = a[key];
+        const y = b[key];
+        return x < y ? -1 : x > y ? 1 : 0;
+    });
+}
+
+function reverseSortByKey(array, key) {
+    return array.sort((a, b) => {
+        const x = a[key];
+        let y = b[key];
+        return x > y ? -1 : x < y ? 1 : 0;
+    });
 }
 
 // main program
@@ -135,11 +148,26 @@ const lotr16 = new Book("The Chronicles of Narnia", "C. S, Lewis", 263, false);
 const lotr24 = new Book("The Da Vinci Code", "Dan Brown", 344, true);
 const lotr25 = new Book("Jane Eyre", "Charlotte Bronte", 550, false);
 const lotr26 = new Book("Gone with the Wind", "Margaret Mitchell", 263, false);
-const lotr34 = new Book("Alice's Advantures in Wonderland", "Lewis Carroll", 344, true);
-const lotr35 = new Book("The Little Prince", "Antione de Saint-Exupery", 550, false);
+const lotr34 = new Book(
+    "Alice's Advantures in Wonderland",
+    "Lewis Carroll",
+    344,
+    true
+);
+const lotr35 = new Book(
+    "The Little Prince",
+    "Antione de Saint-Exupery",
+    550,
+    false
+);
 const lotr36 = new Book("Les Miserables", "Victor Hugo", 263, false);
 const lotr44 = new Book("Anne of Green Gables", "L. M. Montgomery", 344, true);
-const lotr45 = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", 550, false);
+const lotr45 = new Book(
+    "The Hitchhiker's Guide to the Galaxy",
+    "Douglas Adams",
+    550,
+    false
+);
 const lotr46 = new Book("Ender's Game", "Orson Scott Card", 263, false);
 const lotr54 = new Book("Charlotte's Web", "E.B. White", 344, true);
 const lotr55 = new Book("The Alchemist", "Poulo Coelho", 550, false);
@@ -255,30 +283,12 @@ sortReadEl.addEventListener("click", () => {
     displayLibrary();
 });
 
-function sortByKey(array, key) {
-    return array.sort(function (a, b) {
-        var x = a[key];
-        var y = b[key];
-        return x < y ? -1 : x > y ? 1 : 0;
-    });
-}
-
-function reverseSortByKey(array, key) {
-    return array.sort(function (a, b) {
-        var x = a[key];
-        var y = b[key];
-        return x > y ? -1 : x < y ? 1 : 0;
-    });
-}
-
-
 // Confirm deletion
 deleteCancelBtnEl.addEventListener("click", () => {
     deleteAlertEl.classList.remove("show");
 });
 
 deleteConfirmBtnEl.addEventListener("click", () => {
-    deleteFlag = true;
     deleteAlertEl.classList.remove("show");
     library.splice(library.indexOf(bookToDelete), 1);
     bookToDelete = undefined;
