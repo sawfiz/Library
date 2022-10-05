@@ -35,18 +35,6 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-// Utility function to create a delay
-function delay(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
-// Utility function to animate a button press
-async function animateButtonPress(e) {
-  e.target.classList.add('active');
-  await delay(100);
-  e.target.classList.remove('active');
-}
-
 function addBookToLibrary(book) {
   library.push(book);
 }
@@ -76,7 +64,6 @@ function addBookToDisplay(book) {
 
   // Toggle book read status and icon image when the icon is clicked on
   bookReadImg.addEventListener('click', (e) => {
-    animateButtonPress(e);
     bookReadImg.src = book.isRead
       ? 'images/icons8-process-96.png'
       : 'images/icons8-checked-checkbox-96.png';
@@ -96,7 +83,6 @@ function addBookToDisplay(book) {
   bookRow.appendChild(bookEdit);
 
   bookEditImg.addEventListener('click', (e) => {
-    animateButtonPress(e);
     formEl.classList.add('show');
     titleEl.value = book.title;
     authorEl.value = book.author;
@@ -106,7 +92,6 @@ function addBookToDisplay(book) {
   });
 
   bookRemoveImg.addEventListener('click', (e) => {
-    animateButtonPress(e);
     deleteAlertEl.classList.add('show');
     deleteBookTitleEl.innerText = book.title;
     bookToDelete = book;
@@ -217,7 +202,6 @@ displayLibrary();
 
 // Main functions
 addBookImgEl.addEventListener('click', (e) => {
-  animateButtonPress(e);
   formEl.classList.add('show');
 });
 
@@ -264,7 +248,6 @@ let sortPagesDirection = 'ascend';
 let sortReadDirection = 'ascend';
 
 sortTitleEl.addEventListener('click', (e) => {
-  animateButtonPress(e);
   if (sortTitleDirection === 'ascend') {
     sortByKey(library, 'title');
     sortTitleDirection = 'descend';
@@ -276,7 +259,6 @@ sortTitleEl.addEventListener('click', (e) => {
   displayLibrary();
 });
 sortAuthorEl.addEventListener('click', (e) => {
-  animateButtonPress(e);
   if (sortAuthorDirection === 'ascend') {
     sortByKey(library, 'author');
     sortAuthorDirection = 'descend';
@@ -288,7 +270,6 @@ sortAuthorEl.addEventListener('click', (e) => {
   displayLibrary();
 });
 sortPagesEl.addEventListener('click', (e) => {
-  animateButtonPress(e);
   if (sortPagesDirection === 'ascend') {
     sortByKey(library, 'pages');
     sortPagesDirection = 'descend';
@@ -300,7 +281,6 @@ sortPagesEl.addEventListener('click', (e) => {
   displayLibrary();
 });
 sortReadEl.addEventListener('click', (e) => {
-  animateButtonPress(e);
   if (sortReadDirection === 'ascend') {
     sortByKey(library, 'isRead');
     sortReadDirection = 'descend';
