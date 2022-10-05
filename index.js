@@ -83,7 +83,7 @@ function addBookToDisplay(book) {
   bookRow.appendChild(bookEdit);
 
   bookEditImg.addEventListener('click', () => {
-    formEl.classList.add('show');
+    formEl.classList.remove('hidden');
     titleEl.value = book.title;
     authorEl.value = book.author;
     pagesEl.value = book.pages;
@@ -92,7 +92,7 @@ function addBookToDisplay(book) {
   });
 
   bookRemoveImg.addEventListener('click', () => {
-    deleteAlertEl.classList.add('show');
+    deleteAlertEl.classList.remove('hidden');
     deleteBookTitleEl.innerText = book.title;
     bookToDelete = book;
   });
@@ -202,16 +202,18 @@ displayLibrary();
 
 // Main functions
 addBookImgEl.addEventListener('click', () => {
-  formEl.classList.add('show');
+  clearInputs();
+  formEl.classList.remove('hidden');
 });
 
 // Buttons for the book details form
-formCancelBtn.addEventListener('click', () => {
-  formEl.classList.remove('show');
+formCancelBtn.addEventListener('click', (e) => {
+  formEl.classList.add('hidden');
+  e.preventDefault();
   clearInputs();
 });
 
-formConfirmBtn.addEventListener('click', () => {
+formConfirmBtn.addEventListener('click', (e) => {
   if (titleEl.value !== '' && authorEl.value !== '' && pagesEl.value >= 1) {
     const newBook = new Book(
       titleEl.value,
@@ -221,20 +223,20 @@ formConfirmBtn.addEventListener('click', () => {
     );
     addBookToLibrary(newBook);
     addBookToDisplay(newBook);
-    clearInputs();
-    formEl.classList.remove('show');
+    formEl.classList.add('hidden');
     clearLibraryDisplay();
     displayLibrary();
+    e.preventDefault();
   }
 });
 
 // Buttons for the book deletion alert
 deleteCancelBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.remove('show');
+  deleteAlertEl.classList.add('hidden');
 });
 
 deleteConfirmBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.remove('show');
+  deleteAlertEl.classList.add('hidden');
   library.splice(library.indexOf(bookToDelete), 1);
   bookToDelete = undefined;
   clearLibraryDisplay();
