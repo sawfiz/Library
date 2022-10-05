@@ -63,7 +63,7 @@ function addBookToDisplay(book) {
   bookRow.appendChild(bookRead);
 
   // Toggle book read status and icon image when the icon is clicked on
-  bookReadImg.addEventListener('click', (e) => {
+  bookReadImg.addEventListener('click', () => {
     bookReadImg.src = book.isRead
       ? 'images/icons8-process-96.png'
       : 'images/icons8-checked-checkbox-96.png';
@@ -82,7 +82,7 @@ function addBookToDisplay(book) {
 
   bookRow.appendChild(bookEdit);
 
-  bookEditImg.addEventListener('click', (e) => {
+  bookEditImg.addEventListener('click', () => {
     formEl.classList.add('show');
     titleEl.value = book.title;
     authorEl.value = book.author;
@@ -91,7 +91,7 @@ function addBookToDisplay(book) {
     library.splice(library.indexOf(book), 1);
   });
 
-  bookRemoveImg.addEventListener('click', (e) => {
+  bookRemoveImg.addEventListener('click', () => {
     deleteAlertEl.classList.add('show');
     deleteBookTitleEl.innerText = book.title;
     bookToDelete = book;
@@ -201,7 +201,7 @@ addBookToLibrary(lotr56);
 displayLibrary();
 
 // Main functions
-addBookImgEl.addEventListener('click', (e) => {
+addBookImgEl.addEventListener('click', () => {
   formEl.classList.add('show');
 });
 
@@ -247,7 +247,7 @@ let sortAuthorDirection = 'ascend';
 let sortPagesDirection = 'ascend';
 let sortReadDirection = 'ascend';
 
-sortTitleEl.addEventListener('click', (e) => {
+sortTitleEl.addEventListener('click', () => {
   if (sortTitleDirection === 'ascend') {
     sortByKey(library, 'title');
     sortTitleDirection = 'descend';
@@ -258,7 +258,7 @@ sortTitleEl.addEventListener('click', (e) => {
   clearLibraryDisplay();
   displayLibrary();
 });
-sortAuthorEl.addEventListener('click', (e) => {
+sortAuthorEl.addEventListener('click', () => {
   if (sortAuthorDirection === 'ascend') {
     sortByKey(library, 'author');
     sortAuthorDirection = 'descend';
@@ -269,7 +269,7 @@ sortAuthorEl.addEventListener('click', (e) => {
   clearLibraryDisplay();
   displayLibrary();
 });
-sortPagesEl.addEventListener('click', (e) => {
+sortPagesEl.addEventListener('click', () => {
   if (sortPagesDirection === 'ascend') {
     sortByKey(library, 'pages');
     sortPagesDirection = 'descend';
@@ -280,7 +280,7 @@ sortPagesEl.addEventListener('click', (e) => {
   clearLibraryDisplay();
   displayLibrary();
 });
-sortReadEl.addEventListener('click', (e) => {
+sortReadEl.addEventListener('click', () => {
   if (sortReadDirection === 'ascend') {
     sortByKey(library, 'isRead');
     sortReadDirection = 'descend';
