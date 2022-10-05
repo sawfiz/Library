@@ -222,14 +222,12 @@ addBookImgEl.addEventListener('click', (e) => {
 });
 
 // Buttons for the book details form
-formCancelBtn.addEventListener('click', (e) => {
-  animateButtonPress(e);
+formCancelBtn.addEventListener('click', () => {
   formEl.classList.remove('show');
   clearInputs();
 });
 
-formConfirmBtn.addEventListener('click', (e) => {
-  animateButtonPress(e);
+formConfirmBtn.addEventListener('click', () => {
   if (titleEl.value !== '' && authorEl.value !== '' && pagesEl.value >= 1) {
     const newBook = new Book(
       titleEl.value,
@@ -247,13 +245,11 @@ formConfirmBtn.addEventListener('click', (e) => {
 });
 
 // Buttons for the book deletion alert
-deleteCancelBtn.addEventListener('click', (e) => {
-  animateButtonPress(e);
+deleteCancelBtn.addEventListener('click', () => {
   deleteAlertEl.classList.remove('show');
 });
 
-deleteConfirmBtn.addEventListener('click', (e) => {
-  animateButtonPress(e);
+deleteConfirmBtn.addEventListener('click', () => {
   deleteAlertEl.classList.remove('show');
   library.splice(library.indexOf(bookToDelete), 1);
   bookToDelete = undefined;
@@ -315,3 +311,10 @@ sortReadEl.addEventListener('click', (e) => {
   clearLibraryDisplay();
   displayLibrary();
 });
+
+// document.addEventListener('click', (e) => {
+//   console.log(e.target.classList);
+//   if (!e.target.classList.contains('popup')) {
+//     formEl.classList.remove('show');
+//   }
+// });
