@@ -13,7 +13,7 @@ body {
 
 .content-container {
   background: #fcf8e8;
-  width: clamp(400px, 100%, 1000px);
+  width: clamp(460px, 100%, 1000px);
   /* margin-left: clamp(10px, 5%, 100px);
   margin-right: clamp(10px, 5%, 100px); */
   margin: auto;
@@ -49,7 +49,7 @@ h1 {
 
 table {
   border-collapse: collapse;
-  width: max(80%, 480px);
+  width: max(80%, 460px);
   margin: auto;
   position: relative;
 }
