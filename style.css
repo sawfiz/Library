@@ -233,6 +233,12 @@ button {
   overflow-wrap: break-word;
 }
 
+.care {
+  padding: 2rem;
+  font-weight: bolder;
+  text-align: center;
+}
+
 footer {
   position: absolute;
   bottom: 0px;
