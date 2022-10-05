@@ -14,16 +14,19 @@ body {
 .content-container {
   background: #fcf8e8;
   width: clamp(460px, 100%, 1000px);
-  /* margin-left: clamp(10px, 5%, 100px);
-  margin-right: clamp(10px, 5%, 100px); */
   margin: auto;
   position: relative;
   min-height: 100vh;
 }
 
+main {
+  width: clamp(460px, 80%, 800px);
+  margin: auto;
+}
+
 header {
   background: #fcf8e8;
-  width: max(80%, 460px);
+  padding: 0 0.5rem 0 0.5rem;
   height: 8rem;
   margin: auto;
   display: flex;
@@ -49,7 +52,6 @@ h1 {
 
 table {
   border-collapse: collapse;
-  width: max(80%, 460px);
   margin: auto;
   position: relative;
 }
