@@ -88,7 +88,7 @@ function addBookToDisplay(book) {
     setTimeout(() => {
       // Add timeout so that it does not conflict with overall window clicking check
       formEl.classList.add('show');
-      numOfPopup++;
+      numOfPopup += 1;
       titleEl.value = book.title;
       authorEl.value = book.author;
       pagesEl.value = book.pages;
@@ -102,7 +102,7 @@ function addBookToDisplay(book) {
     setTimeout(() => {
       // Add timeout so that it does not conflict with overall window clicking check
       deleteAlertEl.classList.add('show');
-      numOfPopup++;
+      numOfPopup += 1;
       deleteBookTitleEl.innerText = book.title;
       bookToDelete = book;
     }, 100);
@@ -211,14 +211,14 @@ addBookImgEl.addEventListener('click', () => {
     // Add timeout so that it does not conflict with overall window clicking check
     clearInputs();
     formEl.classList.add('show');
-    numOfPopup++;
+    numOfPopup += 1;
   }, 100);
 });
 
 // Buttons for the book details form
 formCancelBtn.addEventListener('click', (e) => {
   formEl.classList.remove('show');
-  numOfPopup--;
+  numOfPopup -= 1;
   e.preventDefault();
   clearInputs();
 });
@@ -234,7 +234,7 @@ formConfirmBtn.addEventListener('click', (e) => {
     addBookToLibrary(newBook);
     addBookToDisplay(newBook);
     formEl.classList.remove('show');
-    numOfPopup--;
+    numOfPopup -= 1;
     displayLibrary();
     e.preventDefault();
   }
@@ -243,12 +243,12 @@ formConfirmBtn.addEventListener('click', (e) => {
 // Buttons for the book deletion alert
 deleteCancelBtn.addEventListener('click', () => {
   deleteAlertEl.classList.remove('show');
-  numOfPopup--;
+  numOfPopup -= 1;
 });
 
 deleteConfirmBtn.addEventListener('click', () => {
   deleteAlertEl.classList.remove('show');
-  numOfPopup--;
+  numOfPopup -= 1;
   library.splice(library.indexOf(bookToDelete), 1);
   bookToDelete = undefined;
   displayLibrary();
@@ -295,7 +295,7 @@ window.addEventListener('click', (e) => {
 
     if (clickedOutsidedActivePopup) {
       popupEl.classList.remove('show');
-      numOfPopup--;
+      numOfPopup -= 1;
     }
   });
 });

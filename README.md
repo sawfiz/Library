@@ -3,7 +3,6 @@
 
 ## To-do
 - Click outside a popup to dismiss it
-- Make sure when there is an active popup on screen, do not allow other popups
 
 ## Key new concepts used
 - Assets
@@ -21,10 +20,11 @@
   - Responsiveness using clamp()
   - Table styling
   
-- Javascript Object
+- Javascript
   - Array 
     - push()
     - splice()
     - sort()
   - ESlint
   - Wait for confirm button pressed in the popup window before deleting a book from the library.  Currently done by passing a global variable.
+- Make sure when there is an active popup on screen, do not allow other popups
