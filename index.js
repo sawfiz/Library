@@ -26,6 +26,7 @@ const deleteConfirmBtn = document.querySelector('#delete-confirm');
 // Variables initialization
 const library = [];
 let bookToDelete; // To pass the book for delete
+let numOfPopup = 0; // Number of popups on screen
 
 // The Book object
 function Book(title, author, pages, isRead) {
@@ -83,9 +84,11 @@ function addBookToDisplay(book) {
   bookRow.appendChild(bookEdit);
 
   bookEditImg.addEventListener('click', () => {
+    if (numOfPopup > 0) return;
     setTimeout(() => {
       // Add timeout so that it does not conflict with overall window clicking check
       formEl.classList.add('show');
+      numOfPopup++;
       titleEl.value = book.title;
       authorEl.value = book.author;
       pagesEl.value = book.pages;
@@ -95,9 +98,11 @@ function addBookToDisplay(book) {
   });
 
   bookRemoveImg.addEventListener('click', () => {
+    if (numOfPopup > 0) return;
     setTimeout(() => {
       // Add timeout so that it does not conflict with overall window clicking check
       deleteAlertEl.classList.add('show');
+      numOfPopup++;
       deleteBookTitleEl.innerText = book.title;
       bookToDelete = book;
     }, 100);
@@ -201,16 +206,19 @@ displayLibrary();
 
 // Main event listeners
 addBookImgEl.addEventListener('click', () => {
+  if (numOfPopup > 0) return;
   setTimeout(() => {
     // Add timeout so that it does not conflict with overall window clicking check
     clearInputs();
     formEl.classList.add('show');
+    numOfPopup++;
   }, 100);
 });
 
 // Buttons for the book details form
 formCancelBtn.addEventListener('click', (e) => {
   formEl.classList.remove('show');
+  numOfPopup--;
   e.preventDefault();
   clearInputs();
 });
@@ -226,6 +234,7 @@ formConfirmBtn.addEventListener('click', (e) => {
     addBookToLibrary(newBook);
     addBookToDisplay(newBook);
     formEl.classList.remove('show');
+    numOfPopup--;
     displayLibrary();
     e.preventDefault();
   }
@@ -234,10 +243,12 @@ formConfirmBtn.addEventListener('click', (e) => {
 // Buttons for the book deletion alert
 deleteCancelBtn.addEventListener('click', () => {
   deleteAlertEl.classList.remove('show');
+  numOfPopup--;
 });
 
 deleteConfirmBtn.addEventListener('click', () => {
   deleteAlertEl.classList.remove('show');
+  numOfPopup--;
   library.splice(library.indexOf(bookToDelete), 1);
   bookToDelete = undefined;
   displayLibrary();
@@ -284,6 +295,7 @@ window.addEventListener('click', (e) => {
 
     if (clickedOutsidedActivePopup) {
       popupEl.classList.remove('show');
+      numOfPopup--;
     }
   });
 });
