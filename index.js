@@ -101,14 +101,14 @@ function addBookToDisplay(book) {
 }
 
 function displayLibrary() {
+  tableBodyEl.innerHTML = '';
   library.forEach((book) => {
     addBookToDisplay(book);
   });
 }
 
-function clearLibraryDisplay() {
-  tableBodyEl.innerHTML = '';
-}
+// function clearLibraryDisplay() {
+// }
 
 function clearInputs() {
   titleEl.value = '';
@@ -117,19 +117,12 @@ function clearInputs() {
   readEl.checked = false;
 }
 
-function sortByKey(array, key) {
+function sortByKey(array, key, sortAscend) {
   return array.sort((a, b) => {
-    const x = a[key];
-    const y = b[key];
-    return x < y ? -1 : x > y ? 1 : 0;
-  });
-}
-
-function reverseSortByKey(array, key) {
-  return array.sort((a, b) => {
-    const x = a[key];
-    const y = b[key];
-    return x > y ? -1 : x < y ? 1 : 0;
+    if (sortAscend) {
+      return a[key] < b[key] ? -1 : 1;
+    }
+    return a[key] > b[key] ? -1 : 1;
   });
 }
 
@@ -200,7 +193,7 @@ addBookToLibrary(lotr56);
 
 displayLibrary();
 
-// Main functions
+// Main event listeners
 addBookImgEl.addEventListener('click', () => {
   clearInputs();
   formEl.classList.remove('hidden');
@@ -224,7 +217,6 @@ formConfirmBtn.addEventListener('click', (e) => {
     addBookToLibrary(newBook);
     addBookToDisplay(newBook);
     formEl.classList.add('hidden');
-    clearLibraryDisplay();
     displayLibrary();
     e.preventDefault();
   }
@@ -239,58 +231,36 @@ deleteConfirmBtn.addEventListener('click', () => {
   deleteAlertEl.classList.add('hidden');
   library.splice(library.indexOf(bookToDelete), 1);
   bookToDelete = undefined;
-  clearLibraryDisplay();
   displayLibrary();
 });
 
-// Sort buttons
-let sortTitleDirection = 'ascend';
-let sortAuthorDirection = 'ascend';
-let sortPagesDirection = 'ascend';
-let sortReadDirection = 'ascend';
+// Table header sort buttons
+let sortTitleAscend = true;
+let sortAuthorAscend = true;
+let sortPagesAscend = true;
+let sortReadAscend = true;
 
 sortTitleEl.addEventListener('click', () => {
-  if (sortTitleDirection === 'ascend') {
-    sortByKey(library, 'title');
-    sortTitleDirection = 'descend';
-  } else {
-    reverseSortByKey(library, 'title');
-    sortTitleDirection = 'ascend';
-  }
-  clearLibraryDisplay();
+  sortByKey(library, 'title', sortTitleAscend);
+  sortTitleAscend = !sortTitleAscend;
   displayLibrary();
 });
+
 sortAuthorEl.addEventListener('click', () => {
-  if (sortAuthorDirection === 'ascend') {
-    sortByKey(library, 'author');
-    sortAuthorDirection = 'descend';
-  } else {
-    reverseSortByKey(library, 'author');
-    sortAuthorDirection = 'ascend';
-  }
-  clearLibraryDisplay();
+  sortByKey(library, 'author', sortAuthorAscend);
+  sortAuthorAscend = !sortAuthorAscend;
   displayLibrary();
 });
+
 sortPagesEl.addEventListener('click', () => {
-  if (sortPagesDirection === 'ascend') {
-    sortByKey(library, 'pages');
-    sortPagesDirection = 'descend';
-  } else {
-    reverseSortByKey(library, 'pages');
-    sortPagesDirection = 'ascend';
-  }
-  clearLibraryDisplay();
+  sortByKey(library, 'pages', sortPagesAscend);
+  sortPagesAscend = !sortPagesAscend;
   displayLibrary();
 });
+
 sortReadEl.addEventListener('click', () => {
-  if (sortReadDirection === 'ascend') {
-    sortByKey(library, 'isRead');
-    sortReadDirection = 'descend';
-  } else {
-    reverseSortByKey(library, 'isRead');
-    sortReadDirection = 'ascend';
-  }
-  clearLibraryDisplay();
+  sortByKey(library, 'isRead', sortReadAscend);
+  sortReadAscend = !sortReadAscend;
   displayLibrary();
 });
 
