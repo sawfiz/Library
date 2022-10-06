@@ -3,6 +3,7 @@
 
 ## To-do
 - Click outside a popup to dismiss it
+- Wait for confirm button pressed in the popup window before deleting a book from the library.  Currently done by passing a global variable.
 
 ## Key new concepts used
 - Assets
