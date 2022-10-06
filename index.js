@@ -83,18 +83,24 @@ function addBookToDisplay(book) {
   bookRow.appendChild(bookEdit);
 
   bookEditImg.addEventListener('click', () => {
-    formEl.classList.remove('hidden');
-    titleEl.value = book.title;
-    authorEl.value = book.author;
-    pagesEl.value = book.pages;
-    readEl.checked = book.checked;
-    library.splice(library.indexOf(book), 1);
+    setTimeout(() => {
+      // Add timeout so that it does not conflict with overall window clicking check
+      formEl.classList.add('show');
+      titleEl.value = book.title;
+      authorEl.value = book.author;
+      pagesEl.value = book.pages;
+      readEl.checked = book.checked;
+      library.splice(library.indexOf(book), 1);
+    }, 100);
   });
 
   bookRemoveImg.addEventListener('click', () => {
-    deleteAlertEl.classList.remove('hidden');
-    deleteBookTitleEl.innerText = book.title;
-    bookToDelete = book;
+    setTimeout(() => {
+      // Add timeout so that it does not conflict with overall window clicking check
+      deleteAlertEl.classList.add('show');
+      deleteBookTitleEl.innerText = book.title;
+      bookToDelete = book;
+    }, 100);
   });
 
   tableBodyEl.appendChild(bookRow);
@@ -195,13 +201,16 @@ displayLibrary();
 
 // Main event listeners
 addBookImgEl.addEventListener('click', () => {
-  clearInputs();
-  formEl.classList.remove('hidden');
+  setTimeout(() => {
+    // Add timeout so that it does not conflict with overall window clicking check
+    clearInputs();
+    formEl.classList.add('show');
+  }, 100);
 });
 
 // Buttons for the book details form
 formCancelBtn.addEventListener('click', (e) => {
-  formEl.classList.add('hidden');
+  formEl.classList.remove('show');
   e.preventDefault();
   clearInputs();
 });
@@ -216,7 +225,7 @@ formConfirmBtn.addEventListener('click', (e) => {
     );
     addBookToLibrary(newBook);
     addBookToDisplay(newBook);
-    formEl.classList.add('hidden');
+    formEl.classList.remove('show');
     displayLibrary();
     e.preventDefault();
   }
@@ -224,11 +233,11 @@ formConfirmBtn.addEventListener('click', (e) => {
 
 // Buttons for the book deletion alert
 deleteCancelBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.add('hidden');
+  deleteAlertEl.classList.remove('show');
 });
 
 deleteConfirmBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.add('hidden');
+  deleteAlertEl.classList.remove('show');
   library.splice(library.indexOf(bookToDelete), 1);
   bookToDelete = undefined;
   displayLibrary();
@@ -264,9 +273,36 @@ sortReadEl.addEventListener('click', () => {
   displayLibrary();
 });
 
-// document.addEventListener('click', (e) => {
-//   console.log(e.target.classList);
-//   if (!e.target.classList.contains('popup')) {
-//     formEl.classList.remove('show');
+// const popupEl = document.querySelector('#book-form');
+
+// window.addEventListener('click', (e) => {
+//   console.log(e.target);
+//   const isPartOfPopup = e.target.closest('#book-form');
+//   console.log(isPartOfPopup);
+//   console.log(popupEl);
+
+//   const clickedOutsidedActivePopup =
+//     !isPartOfPopup && popupEl.classList.contains('show');
+//   console.log(clickedOutsidedActivePopup);
+//   if (clickedOutsidedActivePopup) {
+//     popupEl.classList.remove('show');
 //   }
 // });
+const popupEls = Array.from(document.querySelectorAll('.popup'));
+
+window.addEventListener('click', (e) => {
+  console.log(e.target);
+
+  popupEls.forEach((popupEl) => {
+    const isPartOfPopup = e.target.closest('.popup');
+    console.log(isPartOfPopup);
+    console.log(popupEl);
+
+    const clickedOutsidedActivePopup =
+      !isPartOfPopup && popupEl.classList.contains('show');
+    console.log(clickedOutsidedActivePopup);
+    if (clickedOutsidedActivePopup) {
+      popupEl.classList.remove('show');
+    }
+  });
+});

@@ -139,9 +139,10 @@ tr:hover {
 /* Form */
 
 #book-form {
+  visibility: hidden;
   position: fixed;
   width: 480px;
-  top: 50%;
+  top: 18rem;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid #000;
@@ -149,13 +150,13 @@ tr:hover {
   padding: 1rem;
   border-radius: 5%;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-  transition:ease-out 0.6s;
+  transition:ease-in-out 0.6s;
 }
 
-#book-form.hidden {
-  visibility: hidden;
-  top: 19rem;
-  opacity: 0.5;
+#book-form.show {
+  visibility: visible;
+  top: 50%;
+  opacity: 1;
 }
 
 h2 {
@@ -213,9 +214,10 @@ button {
 }
 
 #delete-alert {
+  visibility: hidden;
   position: fixed;
   width: 410px;
-  top: 50%;
+  top: 18rem;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid #000;
@@ -223,13 +225,14 @@ button {
   padding: 1rem 1rem 0 1rem;
   border-radius: 5%;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-  transition: ease-in 0.5s;
+  opacity: 0.5;
+  transition: ease-in-out 0.5s;
 }
 
-#delete-alert.hidden {
-  visibility: hidden;
-  top: 18rem;
-  opacity: 0.5;
+#delete-alert.show {
+  visibility: visible;
+  top: 50%;
+  opacity: 1;
 }
 
 .delete-alert-container {
