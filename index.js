@@ -273,34 +273,15 @@ sortReadEl.addEventListener('click', () => {
   displayLibrary();
 });
 
-// const popupEl = document.querySelector('#book-form');
-
-// window.addEventListener('click', (e) => {
-//   console.log(e.target);
-//   const isPartOfPopup = e.target.closest('#book-form');
-//   console.log(isPartOfPopup);
-//   console.log(popupEl);
-
-//   const clickedOutsidedActivePopup =
-//     !isPartOfPopup && popupEl.classList.contains('show');
-//   console.log(clickedOutsidedActivePopup);
-//   if (clickedOutsidedActivePopup) {
-//     popupEl.classList.remove('show');
-//   }
-// });
+// Click outside an active popup dismisses it
 const popupEls = Array.from(document.querySelectorAll('.popup'));
 
 window.addEventListener('click', (e) => {
-  console.log(e.target);
-
   popupEls.forEach((popupEl) => {
     const isPartOfPopup = e.target.closest('.popup');
-    console.log(isPartOfPopup);
-    console.log(popupEl);
-
     const clickedOutsidedActivePopup =
       !isPartOfPopup && popupEl.classList.contains('show');
-    console.log(clickedOutsidedActivePopup);
+
     if (clickedOutsidedActivePopup) {
       popupEl.classList.remove('show');
     }
