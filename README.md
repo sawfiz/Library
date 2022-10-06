@@ -2,7 +2,7 @@
 [Project: Library](https://www.theodinproject.com/lessons/node-path-javascript-library) from the [Javascript Course](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript), [the Odin Project](https://www.theodinproject.com/)
 
 ## To-do
-- Click outside a popup to dismiss it
+  - Wait for confirm button pressed in the popup window before deleting a book from the library.  Currently done by passing a global variable.
 
 ## Key new concepts used
 - Assets
@@ -26,5 +26,5 @@
     - splice()
     - sort()
   - ESlint
-  - Wait for confirm button pressed in the popup window before deleting a book from the library.  Currently done by passing a global variable.
+  - Click outside a popup to dismiss it   
 - Make sure when there is an active popup on screen, do not allow other popups
