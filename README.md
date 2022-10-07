@@ -27,4 +27,4 @@
     - sort()
   - ESlint
   - Click outside a popup to dismiss it   
-- Make sure when there is an active popup on screen, do not allow other popups
+  - Make sure when there is an active popup on screen, do not allow other popups
