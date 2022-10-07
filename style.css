@@ -128,7 +128,7 @@ img:active {
 tr:nth-child(even) {
   background-color: #cee5d0;
 }
-tr:hover {
+tbody > tr:hover {
   background-color: honeydew;
 }
 
