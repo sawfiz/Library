@@ -8,17 +8,20 @@ const sortAuthorEl = document.querySelector('#sort-author');
 const sortPagesEl = document.querySelector('#sort-pages');
 const sortReadEl = document.querySelector('#sort-read');
 
+// Modals and overlay
+const overlayEl = document.querySelector('.overlay');
+
 // Book details form elements
-const formEl = document.querySelector('#book-form');
+const formEl = document.querySelector('.modal#book-form');
 const titleEl = document.querySelector('#title');
 const authorEl = document.querySelector('#author');
 const pagesEl = document.querySelector('#pages');
 const readEl = document.querySelector('#read');
-const formCancelBtn = document.querySelector('#cancelBtn');
+const formCloselBtn = document.querySelector('.book-form-close');
 const formConfirmBtn = document.querySelector('#addBookBtn');
 
 // Delete book alert elements
-const deleteAlertEl = document.querySelector('#delete-alert');
+const deleteAlertEl = document.querySelector('.modal#delete-alert');
 const deleteBookTitleEl = document.querySelector('#book-title');
 const deleteCancelBtn = document.querySelector('#delete-cancel');
 const deleteConfirmBtn = document.querySelector('#delete-confirm');
@@ -26,7 +29,6 @@ const deleteConfirmBtn = document.querySelector('#delete-confirm');
 // Variables initialization
 const library = [];
 let bookToDelete; // To pass the book for delete
-let numOfPopup = 0; // Number of popups on screen
 
 // The Book object
 function Book(title, author, pages, isRead) {
@@ -84,28 +86,20 @@ function addBookToDisplay(book) {
   bookRow.appendChild(bookEdit);
 
   bookEditImg.addEventListener('click', () => {
-    if (numOfPopup > 0) return;
-    setTimeout(() => {
-      // Add timeout so that it does not conflict with overall window clicking check
-      formEl.classList.add('show');
-      numOfPopup += 1;
-      titleEl.value = book.title;
-      authorEl.value = book.author;
-      pagesEl.value = book.pages;
-      readEl.checked = book.checked;
-      library.splice(library.indexOf(book), 1);
-    }, 100);
+    formEl.classList.add('active');
+    overlayEl.classList.add('active');
+    titleEl.value = book.title;
+    authorEl.value = book.author;
+    pagesEl.value = book.pages;
+    readEl.checked = book.checked;
+    library.splice(library.indexOf(book), 1);
   });
 
   bookRemoveImg.addEventListener('click', () => {
-    if (numOfPopup > 0) return;
-    setTimeout(() => {
-      // Add timeout so that it does not conflict with overall window clicking check
-      deleteAlertEl.classList.add('show');
-      numOfPopup += 1;
-      deleteBookTitleEl.innerText = book.title;
-      bookToDelete = book;
-    }, 100);
+    deleteAlertEl.classList.add('active');
+    overlayEl.classList.add('active');
+    deleteBookTitleEl.innerText = book.title;
+    bookToDelete = book;
   });
 
   tableBodyEl.appendChild(bookRow);
@@ -124,7 +118,7 @@ function displayLibrary() {
 function clearInputs() {
   titleEl.value = '';
   authorEl.value = '';
-  pagesEl.value = undefined;
+  pagesEl.value = null;
   readEl.checked = false;
 }
 
@@ -206,19 +200,15 @@ displayLibrary();
 
 // Main event listeners
 addBookImgEl.addEventListener('click', () => {
-  if (numOfPopup > 0) return;
-  setTimeout(() => {
-    // Add timeout so that it does not conflict with overall window clicking check
-    clearInputs();
-    formEl.classList.add('show');
-    numOfPopup += 1;
-  }, 100);
+  clearInputs();
+  formEl.classList.add('active');
+  overlayEl.classList.add('active');
 });
 
 // Buttons for the book details form
-formCancelBtn.addEventListener('click', (e) => {
-  formEl.classList.remove('show');
-  numOfPopup -= 1;
+formCloselBtn.addEventListener('click', (e) => {
+  formEl.classList.remove('active');
+  overlayEl.classList.remove('active');
   e.preventDefault();
   clearInputs();
 });
@@ -233,8 +223,8 @@ formConfirmBtn.addEventListener('click', (e) => {
     );
     addBookToLibrary(newBook);
     addBookToDisplay(newBook);
-    formEl.classList.remove('show');
-    numOfPopup -= 1;
+    formEl.classList.remove('active');
+    overlayEl.classList.remove('active');
     displayLibrary();
     e.preventDefault();
   }
@@ -242,15 +232,15 @@ formConfirmBtn.addEventListener('click', (e) => {
 
 // Buttons for the book deletion alert
 deleteCancelBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.remove('show');
-  numOfPopup -= 1;
+  deleteAlertEl.classList.remove('active');
+  overlayEl.classList.remove('active');
 });
 
 deleteConfirmBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.remove('show');
-  numOfPopup -= 1;
+  deleteAlertEl.classList.remove('active');
+  overlayEl.classList.remove('active');
   library.splice(library.indexOf(bookToDelete), 1);
-  bookToDelete = undefined;
+  bookToDelete = null;
   displayLibrary();
 });
 
@@ -282,20 +272,4 @@ sortReadEl.addEventListener('click', () => {
   sortByKey(library, 'isRead', sortReadAscend);
   sortReadAscend = !sortReadAscend;
   displayLibrary();
-});
-
-// Click outside an active popup dismisses it
-const popupEls = Array.from(document.querySelectorAll('.popup'));
-
-window.addEventListener('click', (e) => {
-  popupEls.forEach((popupEl) => {
-    const isPartOfPopup = e.target.closest('.popup');
-    const clickedOutsidedActivePopup =
-      !isPartOfPopup && popupEl.classList.contains('show');
-
-    if (clickedOutsidedActivePopup) {
-      popupEl.classList.remove('show');
-      numOfPopup -= 1;
-    }
-  });
 });
