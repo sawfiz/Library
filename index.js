@@ -124,9 +124,6 @@ function displayLibrary() {
   });
 }
 
-// function clearLibraryDisplay() {
-// }
-
 function clearInputs() {
   titleEl.value = '';
   authorEl.value = '';
@@ -217,9 +214,8 @@ addBookImgEl.addEventListener('click', () => {
 });
 
 // Buttons for the book details form
-formCloselBtn.addEventListener('click', (e) => {
+formCloselBtn.addEventListener('click', () => {
   closeModal(formEl);
-  e.preventDefault();
   clearInputs();
 });
 
@@ -241,8 +237,7 @@ formConfirmBtn.addEventListener('click', (e) => {
 
 // Buttons for the book deletion alert
 deleteCancelBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.remove('active');
-  overlayEl.classList.remove('active');
+  closeModal(deleteAlertEl);
 });
 
 deleteConfirmBtn.addEventListener('click', () => {

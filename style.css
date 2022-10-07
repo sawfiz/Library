@@ -24,6 +24,8 @@ main {
   margin: auto;
 }
 
+
+/* Header */
 header {
   background: #fcf8e8;
   padding: 0 0.5rem 0 0.5rem;
@@ -50,41 +52,45 @@ h1 {
   width: 60px;
 }
 
+/*  */
+/* Table styling */
 table {
   border-collapse: collapse;
   margin: auto;
 }
 
-th {
+/* Table header */
+thead {
   position: sticky;
   top: 8rem;
   background-color: #ecb390;
   font-size: 1.4rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
-
+th {
+  padding: 0.5rem;
+}
+thead > tr > :nth-child(1) {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+thead > tr > :nth-child(2) {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+thead > tr > :nth-child(3) {
+  text-align: right;
+  padding-left: 0.5rem;
+}
+thead > tr > :nth-child(4) {
+  text-align: center;
+  padding-left: 0.5rem;
+}
 .sort-img {
   width: 1.3rem;
 }
 
-.align-left {
-  text-align: left;
-  padding-left: 0.5rem;
-}
-
-.align-right {
-  text-align: right;
-  padding-right: 0.5rem;
-}
-
-.aligh-center {
-  text-align: center;
-  padding: 0px;
-}
-
-tr:nth-child(even) {
-  background-color: #cee5d0;
-}
-
+/* Table body columns */
 tbody > tr > :nth-child(1) {
   width: 40%;
   text-align: left;
@@ -110,30 +116,32 @@ tbody > tr > :nth-child(5) {
   text-align: center;
 }
 
+/* Images */
 img {
   width: 2rem;
   cursor: pointer;
 }
-
 img:active {
   transform: translateY(5%);
 }
 
-td {
-  font-size: 1.2rem;
-  font-family: 'Architects Daughter';
+/* Table rows */
+tr:nth-child(even) {
+  background-color: #cee5d0;
 }
-
-th,
-td {
-  padding: 0.2rem 0;
-  border-bottom: 2px dashed #ddd;
-}
-
 tr:hover {
   background-color: honeydew;
 }
 
+/* Table cells */
+td {
+  font-size: 1.2rem;
+  font-family: 'Architects Daughter';
+  padding: 0.2rem 0;
+  border-bottom: 2px dashed #ddd;
+}
+
+/*  */
 /* modal */
 .modal {
   /* visibility: hidden; */
@@ -170,8 +178,9 @@ tr:hover {
   pointer-events: all;
 }
 
-/* Form */
 
+/*  */
+/* Form */
 #book-form {
   position: fixed;
   width: 480px;
@@ -251,6 +260,9 @@ button:hover {
   scale: 1.1;
 }
 
+
+/*  */
+/* Delete confirmation popup */
 #delete-alert {
   width: 410px;
   background-color: #ee7c78;
@@ -267,6 +279,7 @@ button:hover {
   overflow-wrap: break-word;
 }
 
+/* Bottom of the page */
 .care {
   padding: 2rem;
   font-weight: bolder;
