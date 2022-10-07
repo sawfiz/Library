@@ -220,7 +220,11 @@ formCloselBtn.addEventListener('click', () => {
 });
 
 formConfirmBtn.addEventListener('click', (e) => {
-  if (titleEl.value !== '' && authorEl.value !== '' && pagesEl.value >= 1) {
+  if (
+    titleEl.value.length >= 1 &&
+    authorEl.value.length >= 3 &&
+    pagesEl.value >= 1
+  ) {
     const newBook = new Book(
       titleEl.value,
       authorEl.value,

@@ -12,7 +12,7 @@
   
 - HTML
   - Table
-&nbsp; 
+
 - Styling
   - CSS transition for button press and popup window slide in/out
   - Popup windows
@@ -28,3 +28,7 @@
   - ESlint
   - Click outside a popup to dismiss it   
   - Make sure when there is an active popup on screen, do not allow other popups
+
+# Resources
+- [Build a popup using Javascript](https://www.youtube.com/watch?v=MBaw_6cPmAw)  by WDS
+- [Modal made easy - dialog = the easiest way to make a popup modal](https://www.youtube.com/watch?v=TAB_v6yBXIE) by Kevin Powell
