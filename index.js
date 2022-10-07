@@ -38,6 +38,20 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
+// Modal functions
+function openModal(modal) {
+  if (modal === null) return;
+  modal.classList.add('active');
+  overlayEl.classList.add('active');
+}
+
+function closeModal(modal) {
+  if (modal === null) return;
+  modal.classList.remove('active');
+  overlayEl.classList.remove('active');
+}
+
+// Library functions
 function addBookToLibrary(book) {
   library.push(book);
 }
@@ -86,8 +100,7 @@ function addBookToDisplay(book) {
   bookRow.appendChild(bookEdit);
 
   bookEditImg.addEventListener('click', () => {
-    formEl.classList.add('active');
-    overlayEl.classList.add('active');
+    openModal(formEl);
     titleEl.value = book.title;
     authorEl.value = book.author;
     pagesEl.value = book.pages;
@@ -96,8 +109,7 @@ function addBookToDisplay(book) {
   });
 
   bookRemoveImg.addEventListener('click', () => {
-    deleteAlertEl.classList.add('active');
-    overlayEl.classList.add('active');
+    openModal(deleteAlertEl);
     deleteBookTitleEl.innerText = book.title;
     bookToDelete = book;
   });
@@ -201,14 +213,12 @@ displayLibrary();
 // Main event listeners
 addBookImgEl.addEventListener('click', () => {
   clearInputs();
-  formEl.classList.add('active');
-  overlayEl.classList.add('active');
+  openModal(formEl);
 });
 
 // Buttons for the book details form
 formCloselBtn.addEventListener('click', (e) => {
-  formEl.classList.remove('active');
-  overlayEl.classList.remove('active');
+  closeModal(formEl);
   e.preventDefault();
   clearInputs();
 });
@@ -223,8 +233,7 @@ formConfirmBtn.addEventListener('click', (e) => {
     );
     addBookToLibrary(newBook);
     addBookToDisplay(newBook);
-    formEl.classList.remove('active');
-    overlayEl.classList.remove('active');
+    closeModal(formEl);
     displayLibrary();
     e.preventDefault();
   }
@@ -237,8 +246,7 @@ deleteCancelBtn.addEventListener('click', () => {
 });
 
 deleteConfirmBtn.addEventListener('click', () => {
-  deleteAlertEl.classList.remove('active');
-  overlayEl.classList.remove('active');
+  closeModal(deleteAlertEl);
   library.splice(library.indexOf(bookToDelete), 1);
   bookToDelete = null;
   displayLibrary();
@@ -274,15 +282,7 @@ sortReadEl.addEventListener('click', () => {
   displayLibrary();
 });
 
-
-
-
-function closeModal(modal) {
-  if (modal === null) return;
-  modal.classList.remove('active');
-  overlayEl.classList.remove('active');
-}
-
+// Click outside of a popup closes the popup
 overlayEl.addEventListener('click', () => {
   const modalsEl = document.querySelectorAll('.modal.active');
   modalsEl.forEach((modal) => {
