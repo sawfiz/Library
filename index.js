@@ -273,3 +273,19 @@ sortReadEl.addEventListener('click', () => {
   sortReadAscend = !sortReadAscend;
   displayLibrary();
 });
+
+
+
+
+function closeModal(modal) {
+  if (modal === null) return;
+  modal.classList.remove('active');
+  overlayEl.classList.remove('active');
+}
+
+overlayEl.addEventListener('click', () => {
+  const modalsEl = document.querySelectorAll('.modal.active');
+  modalsEl.forEach((modal) => {
+    closeModal(modal);
+  });
+});
