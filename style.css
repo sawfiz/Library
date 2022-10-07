@@ -24,7 +24,6 @@ main {
   margin: auto;
 }
 
-
 /* Header */
 header {
   background: #fcf8e8;
@@ -178,7 +177,6 @@ td {
   pointer-events: all;
 }
 
-
 /*  */
 /* Form */
 #book-form {
@@ -260,7 +258,6 @@ button:hover {
   scale: 1.1;
 }
 
-
 /*  */
 /* Delete confirmation popup */
 #delete-alert {
@@ -272,6 +269,7 @@ button:hover {
 .delete-alert-container {
   background: #fbf8ea;
   text-align: center;
+  padding: 1rem;
 }
 
 #book-title {
