@@ -32,7 +32,7 @@ let bookToDelete; // To pass the book to delete
 let bookToEdit; // To pass the book to edit
 let isNewBook; // Flag to different if adding a new book or editing a book
 
-// The Book object
+// The Book class
 class Book {
   constructor(title, author, pages, isRead) {
     this.title = title;
@@ -58,7 +58,6 @@ function closeModal(modal) {
 // Book prototype functions
 Book.prototype.addToLibrary = function () {
   library.push(this);
-  console.log(library);
 };
 
 Book.prototype.removeFromLibrary = function () {
@@ -116,8 +115,6 @@ Book.prototype.addToDisplay = function () {
     authorEl.value = this.author;
     pagesEl.value = this.pages;
     readEl.checked = this.isRead;
-    console.log(this.isRead);
-
     bookToEdit = this;
   });
 
@@ -236,12 +233,14 @@ formCloselBtn.addEventListener('click', () => {
 
 formConfirmBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  if (
-    titleEl.value.length >= 1 &&
-    authorEl.value.length >= 3 &&
-    pagesEl.value >= 1
-  ) {
-    if (isNewBook === true) {
+
+  if (isNewBook === true) {
+    // Add a new book
+    if (
+      titleEl.value.length >= 1 &&
+      authorEl.value.length >= 3 &&
+      pagesEl.value >= 1
+    ) {
       const newBook = new Book(
         titleEl.value,
         authorEl.value,
@@ -251,7 +250,7 @@ formConfirmBtn.addEventListener('click', (e) => {
       newBook.addToLibrary();
       newBook.addToDisplay();
     } else {
-      // Edit mode
+      // Edit an existing book
       bookToEdit.title = titleEl.value;
       bookToEdit.author = authorEl.value;
       bookToEdit.pages = pagesEl.value;
