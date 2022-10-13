@@ -115,7 +115,9 @@ Book.prototype.addToDisplay = function () {
     titleEl.value = this.title;
     authorEl.value = this.author;
     pagesEl.value = this.pages;
-    readEl.checked = this.checked;
+    readEl.checked = this.isRead;
+    console.log(this.isRead);
+    
     bookToEdit = this;
   });
 
@@ -229,7 +231,7 @@ formConfirmBtn.addEventListener('click', (e) => {
         titleEl.value,
         authorEl.value,
         pagesEl.value,
-        readEl.value === "true"
+        readEl.checked
       );
       newBook.addToLibrary();
       newBook.addToDisplay();
@@ -238,19 +240,7 @@ formConfirmBtn.addEventListener('click', (e) => {
       bookToEdit.title = titleEl.value;
       bookToEdit.author = authorEl.value;
       bookToEdit.pages = pagesEl.value;
-      bookToEdit.isRead = readEl.value === "true";
-      // TODO: need to update reads status display here.
-      // const index = library.indexOf(bookToEdit);
-      // console.log(index);
-      // const bookEl = tableBodyEl.querySelector(`:nth-child(${index + 1})`);
-      // console.log(bookEl);
-      // const readCellEl = tableBodyEl.querySelector(':nth-child(4)');
-      // console.log(readCellEl);
-      // const readImgEl = tableBodyEl.querySelector('img');
-      // console.log(readImgEl);
-      // readImgEl.src = bookToEdit.isRead
-      //   ? 'images/icons8-process-96.png'
-      //   : 'images/icons8-checked-checkbox-96.png';
+      bookToEdit.isRead = readEl.checked;
     }
     closeModal(formEl);
     displayLibrary();
