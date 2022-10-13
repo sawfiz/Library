@@ -53,51 +53,41 @@ function closeModal(modal) {
   overlayEl.classList.remove('active');
 }
 
-// Library functions
-// function addBookToLibrary(book) {
-//   library.push(book);
-// }
-
-// Book.prototype.getTitle = function () {
-//   console.log(this.title);
-// };
-
+// Book prototype functions
 Book.prototype.addToLibrary = function () {
   library.push(this);
+  console.log(library);
 };
 
-
-
-
-function addBookToDisplay(book) {
+Book.prototype.addToDisplay = function () {
   const bookRow = document.createElement('tr');
 
   const bookTitle = document.createElement('td');
-  bookTitle.innerText = book.title;
+  bookTitle.innerText = this.title;
   bookRow.appendChild(bookTitle);
 
   const bookAuthor = document.createElement('td');
-  bookAuthor.innerText = book.author;
+  bookAuthor.innerText = this.author;
   bookRow.appendChild(bookAuthor);
 
   const bookPages = document.createElement('td');
-  bookPages.innerText = book.pages;
+  bookPages.innerText = this.pages;
   bookRow.appendChild(bookPages);
 
   const bookRead = document.createElement('td');
   const bookReadImg = document.createElement('img');
   bookRead.appendChild(bookReadImg);
-  bookReadImg.src = book.isRead
+  bookReadImg.src = this.isRead
     ? 'images/icons8-checked-checkbox-96.png'
     : 'images/icons8-process-96.png';
   bookRow.appendChild(bookRead);
 
   // Toggle book read status and icon image when the icon is clicked on
   bookReadImg.addEventListener('click', () => {
-    bookReadImg.src = book.isRead
+    bookReadImg.src = this.isRead
       ? 'images/icons8-process-96.png'
       : 'images/icons8-checked-checkbox-96.png';
-    book.isRead = !book.isRead;
+    this.isRead = !this.isRead;
   });
 
   const bookEdit = document.createElement('td');
@@ -114,26 +104,26 @@ function addBookToDisplay(book) {
 
   bookEditImg.addEventListener('click', () => {
     openModal(formEl);
-    titleEl.value = book.title;
-    authorEl.value = book.author;
-    pagesEl.value = book.pages;
-    readEl.checked = book.checked;
-    library.splice(library.indexOf(book), 1);
+    titleEl.value = this.title;
+    authorEl.value = this.author;
+    pagesEl.value = this.pages;
+    readEl.checked = this.checked;
+    library.splice(library.indexOf(this), 1);
   });
 
   bookRemoveImg.addEventListener('click', () => {
     openModal(deleteAlertEl);
-    deleteBookTitleEl.innerText = book.title;
-    bookToDelete = book;
+    deleteBookTitleEl.innerText = this.title;
+    bookToDelete = this;
   });
 
   tableBodyEl.appendChild(bookRow);
-}
+};
 
 function displayLibrary() {
   tableBodyEl.innerHTML = '';
   library.forEach((book) => {
-    addBookToDisplay(book);
+    book.addToDisplay();
   });
 }
 
@@ -201,7 +191,7 @@ book2.addToLibrary();
 book3.addToLibrary();
 book4.addToLibrary();
 book5.addToLibrary();
-book6.addToLibrary()
+book6.addToLibrary();
 
 displayLibrary();
 
@@ -218,6 +208,7 @@ formCloselBtn.addEventListener('click', () => {
 });
 
 formConfirmBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   if (
     titleEl.value.length >= 1 &&
     authorEl.value.length >= 3 &&
@@ -230,9 +221,8 @@ formConfirmBtn.addEventListener('click', (e) => {
       readEl.value
     );
     newBook.addToLibrary();
-    addBookToDisplay(newBook);
+    newBook.addToDisplay();
     closeModal(formEl);
-    e.preventDefault();
   }
 });
 
