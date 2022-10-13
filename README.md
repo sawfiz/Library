@@ -28,6 +28,7 @@
   - ESlint
   - Click outside a popup to dismiss it   
   - Make sure when there is an active popup on screen, do not allow other popups
+  - Learn to use prototype functions inherented by all objects of the same class
 
 # Resources
 - [Build a popup using Javascript](https://www.youtube.com/watch?v=MBaw_6cPmAw)  by WDS

@@ -60,7 +60,7 @@ Book.prototype.addToLibrary = function () {
 };
 
 Book.prototype.removeFromLibrary = function() {
-  library.splice(library.indexOf(bookToDelete), 1);
+  library.splice(library.indexOf(this), 1);
   bookToDelete = null;
 }
 
@@ -114,7 +114,8 @@ Book.prototype.addToDisplay = function () {
     authorEl.value = this.author;
     pagesEl.value = this.pages;
     readEl.checked = this.checked;
-    library.splice(library.indexOf(this), 1);
+    this.removeFromLibrary();
+    // library.splice(library.indexOf(this), 1);
   });
 
   bookRemoveImg.addEventListener('click', () => {
@@ -230,6 +231,7 @@ formConfirmBtn.addEventListener('click', (e) => {
     newBook.addToLibrary();
     newBook.addToDisplay();
     closeModal(formEl);
+    displayLibrary();
   }
 });
 
