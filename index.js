@@ -31,11 +31,13 @@ const library = [];
 let bookToDelete; // To pass the book for delete
 
 // The Book object
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
 }
 
 // Modal functions
@@ -52,9 +54,20 @@ function closeModal(modal) {
 }
 
 // Library functions
-function addBookToLibrary(book) {
-  library.push(book);
-}
+// function addBookToLibrary(book) {
+//   library.push(book);
+// }
+
+// Book.prototype.getTitle = function () {
+//   console.log(this.title);
+// };
+
+Book.prototype.addToLibrary = function () {
+  library.push(this);
+};
+
+
+
 
 function addBookToDisplay(book) {
   const bookRow = document.createElement('tr');
@@ -141,69 +154,54 @@ function sortByKey(array, key, sortAscend) {
 }
 
 // Initialize the library book list
-const lotr1 = new Book('Lord of the Rings', 'J. R. R.Tolkin', 9250, true);
-const lotr2 = new Book('A Game of Thrones', 'George R. R. Martin', 694, false);
-const lotr3 = new Book(
+const book1 = new Book('Lord of the Rings', 'J. R. R.Tolkin', 9250, true);
+const book2 = new Book('A Game of Thrones', 'George R. R. Martin', 694, false);
+const book3 = new Book(
   'Harry Potter and the Deathly Hallows',
   'J. K. Rowling',
   607,
   false
 );
-const lotr4 = new Book('The Hunger Games', 'Suzanne Collins', 344, true);
-const lotr5 = new Book('Pride and Prejudice', 'Jane Austin', 550, false);
-const lotr6 = new Book('To Kill a Mockngbird', 'Harper Lee', 263, false);
-const lotr14 = new Book('The Book Thief', 'Mark Zusak', 344, true);
-const lotr15 = new Book('Animal Farm', 'George Orwell', 550, false);
-const lotr16 = new Book('The Chronicles of Narnia', 'C. S, Lewis', 263, false);
-const lotr24 = new Book('The Da Vinci Code', 'Dan Brown', 344, true);
-const lotr25 = new Book('Jane Eyre', 'Charlotte Bronte', 550, false);
-const lotr26 = new Book('Gone with the Wind', 'Margaret Mitchell', 263, false);
-const lotr34 = new Book(
+const book4 = new Book('The Hunger Games', 'Suzanne Collins', 344, true);
+const book5 = new Book('Pride and Prejudice', 'Jane Austin', 550, false);
+const book6 = new Book('To Kill a Mockngbird', 'Harper Lee', 263, false);
+const book14 = new Book('The Book Thief', 'Mark Zusak', 344, true);
+const book15 = new Book('Animal Farm', 'George Orwell', 550, false);
+const book16 = new Book('The Chronicles of Narnia', 'C. S, Lewis', 263, false);
+const book24 = new Book('The Da Vinci Code', 'Dan Brown', 344, true);
+const book25 = new Book('Jane Eyre', 'Charlotte Bronte', 550, false);
+const book26 = new Book('Gone with the Wind', 'Margaret Mitchell', 263, false);
+const book34 = new Book(
   "Alice's Advantures in Wonderland",
   'Lewis Carroll',
   344,
   true
 );
-const lotr35 = new Book(
+const book35 = new Book(
   'The Little Prince',
   'Antione de Saint-Exupery',
   550,
   false
 );
-const lotr36 = new Book('Les Miserables', 'Victor Hugo', 263, false);
-const lotr44 = new Book('Anne of Green Gables', 'L. M. Montgomery', 344, true);
-const lotr45 = new Book(
+const book36 = new Book('Les Miserables', 'Victor Hugo', 263, false);
+const book44 = new Book('Anne of Green Gables', 'L. M. Montgomery', 344, true);
+const book45 = new Book(
   "The Hitchhiker's Guide to the Galaxy",
   'Douglas Adams',
   550,
   false
 );
-const lotr46 = new Book("Ender's Game", 'Orson Scott Card', 263, false);
-const lotr54 = new Book("Charlotte's Web", 'E.B. White', 344, true);
-const lotr55 = new Book('The Alchemist', 'Poulo Coelho', 550, false);
-const lotr56 = new Book('The Catcher in the Rye', 'J.D. Salinger', 263, false);
+const book46 = new Book("Ender's Game", 'Orson Scott Card', 263, false);
+const book54 = new Book("Charlotte's Web", 'E.B. White', 344, true);
+const book55 = new Book('The Alchemist', 'Poulo Coelho', 550, false);
+const book56 = new Book('The Catcher in the Rye', 'J.D. Salinger', 263, false);
 
-addBookToLibrary(lotr1);
-addBookToLibrary(lotr2);
-addBookToLibrary(lotr3);
-addBookToLibrary(lotr4);
-addBookToLibrary(lotr5);
-addBookToLibrary(lotr6);
-addBookToLibrary(lotr14);
-addBookToLibrary(lotr15);
-addBookToLibrary(lotr16);
-addBookToLibrary(lotr24);
-addBookToLibrary(lotr25);
-addBookToLibrary(lotr26);
-addBookToLibrary(lotr34);
-addBookToLibrary(lotr35);
-addBookToLibrary(lotr36);
-addBookToLibrary(lotr44);
-addBookToLibrary(lotr45);
-addBookToLibrary(lotr46);
-addBookToLibrary(lotr54);
-addBookToLibrary(lotr55);
-addBookToLibrary(lotr56);
+book1.addToLibrary();
+book2.addToLibrary();
+book3.addToLibrary();
+book4.addToLibrary();
+book5.addToLibrary();
+book6.addToLibrary()
 
 displayLibrary();
 
@@ -231,10 +229,9 @@ formConfirmBtn.addEventListener('click', (e) => {
       pagesEl.value,
       readEl.value
     );
-    addBookToLibrary(newBook);
+    newBook.addToLibrary();
     addBookToDisplay(newBook);
     closeModal(formEl);
-    displayLibrary();
     e.preventDefault();
   }
 });
