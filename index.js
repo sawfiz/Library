@@ -229,7 +229,7 @@ formConfirmBtn.addEventListener('click', (e) => {
         titleEl.value,
         authorEl.value,
         pagesEl.value,
-        readEl.value
+        readEl.value === "true"
       );
       newBook.addToLibrary();
       newBook.addToDisplay();
@@ -238,8 +238,19 @@ formConfirmBtn.addEventListener('click', (e) => {
       bookToEdit.title = titleEl.value;
       bookToEdit.author = authorEl.value;
       bookToEdit.pages = pagesEl.value;
-      bookToEdit.isRead = readEl.value;
+      bookToEdit.isRead = readEl.value === "true";
       // TODO: need to update reads status display here.
+      // const index = library.indexOf(bookToEdit);
+      // console.log(index);
+      // const bookEl = tableBodyEl.querySelector(`:nth-child(${index + 1})`);
+      // console.log(bookEl);
+      // const readCellEl = tableBodyEl.querySelector(':nth-child(4)');
+      // console.log(readCellEl);
+      // const readImgEl = tableBodyEl.querySelector('img');
+      // console.log(readImgEl);
+      // readImgEl.src = bookToEdit.isRead
+      //   ? 'images/icons8-process-96.png'
+      //   : 'images/icons8-checked-checkbox-96.png';
     }
     closeModal(formEl);
     displayLibrary();
