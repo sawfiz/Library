@@ -59,6 +59,12 @@ Book.prototype.addToLibrary = function () {
   console.log(library);
 };
 
+Book.prototype.removeFromLibrary = function() {
+  library.splice(library.indexOf(bookToDelete), 1);
+  bookToDelete = null;
+}
+
+
 Book.prototype.addToDisplay = function () {
   const bookRow = document.createElement('tr');
 
@@ -120,6 +126,7 @@ Book.prototype.addToDisplay = function () {
   tableBodyEl.appendChild(bookRow);
 };
 
+// Other functions
 function displayLibrary() {
   tableBodyEl.innerHTML = '';
   library.forEach((book) => {
@@ -233,8 +240,7 @@ deleteCancelBtn.addEventListener('click', () => {
 
 deleteConfirmBtn.addEventListener('click', () => {
   closeModal(deleteAlertEl);
-  library.splice(library.indexOf(bookToDelete), 1);
-  bookToDelete = null;
+  bookToDelete.removeFromLibrary();
   displayLibrary();
 });
 
