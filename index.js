@@ -28,7 +28,9 @@ const deleteConfirmBtn = document.querySelector('#delete-confirm');
 
 // Variables initialization
 const library = [];
-let bookToDelete; // To pass the book for delete
+let bookToDelete; // To pass the book to delete
+let bookToEdit; // To pass the book to edit
+let isNewBook;
 
 // The Book object
 class Book {
@@ -59,11 +61,10 @@ Book.prototype.addToLibrary = function () {
   console.log(library);
 };
 
-Book.prototype.removeFromLibrary = function() {
+Book.prototype.removeFromLibrary = function () {
   library.splice(library.indexOf(this), 1);
   bookToDelete = null;
-}
-
+};
 
 Book.prototype.addToDisplay = function () {
   const bookRow = document.createElement('tr');
@@ -109,13 +110,13 @@ Book.prototype.addToDisplay = function () {
   bookRow.appendChild(bookEdit);
 
   bookEditImg.addEventListener('click', () => {
+    isNewBook = false;
     openModal(formEl);
     titleEl.value = this.title;
     authorEl.value = this.author;
     pagesEl.value = this.pages;
     readEl.checked = this.checked;
-    this.removeFromLibrary();
-    // library.splice(library.indexOf(this), 1);
+    bookToEdit = this;
   });
 
   bookRemoveImg.addEventListener('click', () => {
@@ -205,6 +206,7 @@ displayLibrary();
 
 // Main event listeners
 addBookImgEl.addEventListener('click', () => {
+  isNewBook = true;
   clearInputs();
   openModal(formEl);
 });
@@ -222,14 +224,23 @@ formConfirmBtn.addEventListener('click', (e) => {
     authorEl.value.length >= 3 &&
     pagesEl.value >= 1
   ) {
-    const newBook = new Book(
-      titleEl.value,
-      authorEl.value,
-      pagesEl.value,
-      readEl.value
-    );
-    newBook.addToLibrary();
-    newBook.addToDisplay();
+    if (isNewBook === true) {
+      const newBook = new Book(
+        titleEl.value,
+        authorEl.value,
+        pagesEl.value,
+        readEl.value
+      );
+      newBook.addToLibrary();
+      newBook.addToDisplay();
+    } else {
+      // Edit mode
+      bookToEdit.title = titleEl.value;
+      bookToEdit.author = authorEl.value;
+      bookToEdit.pages = pagesEl.value;
+      bookToEdit.isRead = readEl.value;
+      // TODO: need to update reads status display here.
+    }
     closeModal(formEl);
     displayLibrary();
   }
