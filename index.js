@@ -30,7 +30,7 @@ const deleteConfirmBtn = document.querySelector('#delete-confirm');
 const library = [];
 let bookToDelete; // To pass the book to delete
 let bookToEdit; // To pass the book to edit
-let isNewBook;
+let isNewBook; // Flag to different if adding a new book or editing a book
 
 // The Book object
 class Book {
@@ -117,7 +117,7 @@ Book.prototype.addToDisplay = function () {
     pagesEl.value = this.pages;
     readEl.checked = this.isRead;
     console.log(this.isRead);
-    
+
     bookToEdit = this;
   });
 
@@ -166,36 +166,36 @@ const book3 = new Book(
 const book4 = new Book('The Hunger Games', 'Suzanne Collins', 344, true);
 const book5 = new Book('Pride and Prejudice', 'Jane Austin', 550, false);
 const book6 = new Book('To Kill a Mockngbird', 'Harper Lee', 263, false);
-const book14 = new Book('The Book Thief', 'Mark Zusak', 344, true);
-const book15 = new Book('Animal Farm', 'George Orwell', 550, false);
-const book16 = new Book('The Chronicles of Narnia', 'C. S, Lewis', 263, false);
-const book24 = new Book('The Da Vinci Code', 'Dan Brown', 344, true);
-const book25 = new Book('Jane Eyre', 'Charlotte Bronte', 550, false);
-const book26 = new Book('Gone with the Wind', 'Margaret Mitchell', 263, false);
-const book34 = new Book(
+const book7 = new Book('The Book Thief', 'Mark Zusak', 344, true);
+const book8 = new Book('Animal Farm', 'George Orwell', 550, false);
+const book9 = new Book('The Chronicles of Narnia', 'C. S, Lewis', 263, false);
+const book10 = new Book('The Da Vinci Code', 'Dan Brown', 344, true);
+const book11 = new Book('Jane Eyre', 'Charlotte Bronte', 550, false);
+const book12 = new Book('Gone with the Wind', 'Margaret Mitchell', 263, false);
+const book13 = new Book(
   "Alice's Advantures in Wonderland",
   'Lewis Carroll',
   344,
   true
 );
-const book35 = new Book(
+const book14 = new Book(
   'The Little Prince',
   'Antione de Saint-Exupery',
   550,
   false
 );
-const book36 = new Book('Les Miserables', 'Victor Hugo', 263, false);
-const book44 = new Book('Anne of Green Gables', 'L. M. Montgomery', 344, true);
-const book45 = new Book(
+const book15 = new Book('Les Miserables', 'Victor Hugo', 263, false);
+const book16 = new Book('Anne of Green Gables', 'L. M. Montgomery', 344, true);
+const book17 = new Book(
   "The Hitchhiker's Guide to the Galaxy",
   'Douglas Adams',
   550,
   false
 );
-const book46 = new Book("Ender's Game", 'Orson Scott Card', 263, false);
-const book54 = new Book("Charlotte's Web", 'E.B. White', 344, true);
-const book55 = new Book('The Alchemist', 'Poulo Coelho', 550, false);
-const book56 = new Book('The Catcher in the Rye', 'J.D. Salinger', 263, false);
+const book18 = new Book("Ender's Game", 'Orson Scott Card', 263, false);
+const book19 = new Book("Charlotte's Web", 'E.B. White', 344, true);
+const book20 = new Book('The Alchemist', 'Poulo Coelho', 550, false);
+const book21 = new Book('The Catcher in the Rye', 'J.D. Salinger', 263, false);
 
 book1.addToLibrary();
 book2.addToLibrary();
@@ -203,6 +203,21 @@ book3.addToLibrary();
 book4.addToLibrary();
 book5.addToLibrary();
 book6.addToLibrary();
+book7.addToLibrary();
+book8.addToLibrary();
+book9.addToLibrary();
+book10.addToLibrary();
+book11.addToLibrary();
+book12.addToLibrary();
+book13.addToLibrary();
+book14.addToLibrary();
+book15.addToLibrary();
+book16.addToLibrary();
+book17.addToLibrary();
+book18.addToLibrary();
+book19.addToLibrary();
+book20.addToLibrary();
+book21.addToLibrary();
 
 displayLibrary();
 
