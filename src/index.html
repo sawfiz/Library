@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Library</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -46,36 +45,38 @@
       <div class="care">Please help to take care of our books. Thank you!</div>
     </main>
 
-    <form class="modal" id="book-form">
-      <div class="book-form-header">
-        <div class="book-form-title">Book details</div>
-        <div class="book-form-close">&times;</div>
-      </div>
-      <fieldset>
-        <div class="entry-line">
-          <label for="title">Title</label>
-          <input type="text" name="title" id="title" required minlength="1">
+    <dialog id="book-form">
+      <form>
+        <div class="book-form-header">
+          <div class="book-form-title">Book details</div>
+          <div class="book-form-close">&times;</div>
         </div>
-        <div class="entry-line">
-          <label for="author">Author</label>
-          <input type="text" name="author" id="author" required minlength="3">
+        <fieldset>
+          <div class="entry-line">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required minlength="1">
+          </div>
+          <div class="entry-line">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" required minlength="3">
+          </div>
+          <div class="entry-line">
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" id="pages" required min="1">
+          </div>
+          <div class="entry-line">
+            <label for="read">Read</label>
+            <input type="checkbox" name="read" id="read">
+          </div>
+        </fieldset>
+        <div class="button-container">
+          <button id="resetBtn" type="reset">Reset</button>
+          <button id="addBookBtn" type="submit">Confirm</button>
         </div>
-        <div class="entry-line">
-          <label for="pages">Pages</label>
-          <input type="number" name="pages" id="pages" required min="1">
-        </div>
-        <div class="entry-line">
-          <label for="read">Read</label>
-          <input type="checkbox" name="read" id="read">
-        </div>
-      </fieldset>
-      <div class="button-container">
-        <button id="resetBtn" type="reset">Reset</button>
-        <button id="addBookBtn" type="submit">Confirm</button>
-      </div>
-    </form>
+      </form>
+    </dialog>
 
-    <div class="modal" id="delete-alert">
+    <dialog id="delete-alert">
       <div class="delete-alert-container">
         <img src="images/icons8-error-96.png" alt="">
         <p>Please confirm that you'd like to delete the book <span id="book-title"></span></p>
@@ -84,7 +85,7 @@
         <button id="delete-cancel">Cancel</button>
         <button id="delete-confirm">Confirm</button>
       </div>
-    </div>
+    </dialog>
 
 
     <footer>Copyright &copy; sawfiz@github</footer>

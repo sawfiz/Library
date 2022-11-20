@@ -1,3 +1,31 @@
+/// Model
+const book = (index, title, author, pages, isRead) => {
+  return { index, title, author, pages, isRead };
+};
+
+
+
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
+}
+
+/// Controller
+const library = [];
+// Book prototype functions
+Book.prototype.addToLibrary = function () {
+  library.push(this);
+};
+
+Book.prototype.removeFromLibrary = function () {
+  library.splice(library.indexOf(this), 1);
+  bookToDelete = null;
+};
+
 // Header elements
 const addBookImgEl = document.querySelector('.addBookImg');
 
@@ -27,20 +55,9 @@ const deleteCancelBtn = document.querySelector('#delete-cancel');
 const deleteConfirmBtn = document.querySelector('#delete-confirm');
 
 // Variables initialization
-const library = [];
 let bookToDelete; // To pass the book to delete
 let bookToEdit; // To pass the book to edit
 let isNewBook; // Flag to different if adding a new book or editing a book
-
-// The Book class
-class Book {
-  constructor(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-  }
-}
 
 // Modal functions
 function openModal(modal) {
@@ -54,16 +71,6 @@ function closeModal(modal) {
   modal.classList.remove('active');
   overlayEl.classList.remove('active');
 }
-
-// Book prototype functions
-Book.prototype.addToLibrary = function () {
-  library.push(this);
-};
-
-Book.prototype.removeFromLibrary = function () {
-  library.splice(library.indexOf(this), 1);
-  bookToDelete = null;
-};
 
 Book.prototype.addToDisplay = function () {
   const bookRow = document.createElement('tr');
@@ -151,73 +158,6 @@ function sortByKey(array, key, sortAscend) {
   });
 }
 
-// Initialize the library book list
-const book1 = new Book('Lord of the Rings', 'J. R. R.Tolkin', 9250, true);
-const book2 = new Book('A Game of Thrones', 'George R. R. Martin', 694, false);
-const book3 = new Book(
-  'Harry Potter and the Deathly Hallows',
-  'J. K. Rowling',
-  607,
-  false
-);
-const book4 = new Book('The Hunger Games', 'Suzanne Collins', 344, true);
-const book5 = new Book('Pride and Prejudice', 'Jane Austin', 550, false);
-const book6 = new Book('To Kill a Mockngbird', 'Harper Lee', 263, false);
-const book7 = new Book('The Book Thief', 'Mark Zusak', 344, true);
-const book8 = new Book('Animal Farm', 'George Orwell', 550, false);
-const book9 = new Book('The Chronicles of Narnia', 'C. S, Lewis', 263, false);
-const book10 = new Book('The Da Vinci Code', 'Dan Brown', 344, true);
-const book11 = new Book('Jane Eyre', 'Charlotte Bronte', 550, false);
-const book12 = new Book('Gone with the Wind', 'Margaret Mitchell', 263, false);
-const book13 = new Book(
-  "Alice's Advantures in Wonderland",
-  'Lewis Carroll',
-  344,
-  true
-);
-const book14 = new Book(
-  'The Little Prince',
-  'Antione de Saint-Exupery',
-  550,
-  false
-);
-const book15 = new Book('Les Miserables', 'Victor Hugo', 263, false);
-const book16 = new Book('Anne of Green Gables', 'L. M. Montgomery', 344, true);
-const book17 = new Book(
-  "The Hitchhiker's Guide to the Galaxy",
-  'Douglas Adams',
-  550,
-  false
-);
-const book18 = new Book("Ender's Game", 'Orson Scott Card', 263, false);
-const book19 = new Book("Charlotte's Web", 'E.B. White', 344, true);
-const book20 = new Book('The Alchemist', 'Poulo Coelho', 550, false);
-const book21 = new Book('The Catcher in the Rye', 'J.D. Salinger', 263, false);
-
-book1.addToLibrary();
-book2.addToLibrary();
-book3.addToLibrary();
-book4.addToLibrary();
-book5.addToLibrary();
-book6.addToLibrary();
-book7.addToLibrary();
-book8.addToLibrary();
-book9.addToLibrary();
-book10.addToLibrary();
-book11.addToLibrary();
-book12.addToLibrary();
-book13.addToLibrary();
-book14.addToLibrary();
-book15.addToLibrary();
-book16.addToLibrary();
-book17.addToLibrary();
-book18.addToLibrary();
-book19.addToLibrary();
-book20.addToLibrary();
-book21.addToLibrary();
-
-displayLibrary();
-
 // Main event listeners
 addBookImgEl.addEventListener('click', () => {
   isNewBook = true;
@@ -235,7 +175,7 @@ formConfirmBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
   if (isNewBook === true) {
-    // Add a new book
+    // Add a new boo
     if (
       titleEl.value.length >= 1 &&
       authorEl.value.length >= 3 &&
@@ -309,3 +249,72 @@ overlayEl.addEventListener('click', () => {
     closeModal(modal);
   });
 });
+
+//
+
+// Initialize the library book list
+const book1 = new Book('Lord of the Rings', 'J. R. R.Tolkin', 9250, true);
+const book2 = new Book('A Game of Thrones', 'George R. R. Martin', 694, false);
+const book3 = new Book(
+  'Harry Potter and the Deathly Hallows',
+  'J. K. Rowling',
+  607,
+  false
+);
+const book4 = new Book('The Hunger Games', 'Suzanne Collins', 344, true);
+const book5 = new Book('Pride and Prejudice', 'Jane Austin', 550, false);
+const book6 = new Book('To Kill a Mockngbird', 'Harper Lee', 263, false);
+const book7 = new Book('The Book Thief', 'Mark Zusak', 344, true);
+const book8 = new Book('Animal Farm', 'George Orwell', 550, false);
+const book9 = new Book('The Chronicles of Narnia', 'C. S, Lewis', 263, false);
+const book10 = new Book('The Da Vinci Code', 'Dan Brown', 344, true);
+const book11 = new Book('Jane Eyre', 'Charlotte Bronte', 550, false);
+const book12 = new Book('Gone with the Wind', 'Margaret Mitchell', 263, false);
+const book13 = new Book(
+  "Alice's Advantures in Wonderland",
+  'Lewis Carroll',
+  344,
+  true
+);
+const book14 = new Book(
+  'The Little Prince',
+  'Antione de Saint-Exupery',
+  550,
+  false
+);
+const book15 = new Book('Les Miserables', 'Victor Hugo', 263, false);
+const book16 = new Book('Anne of Green Gables', 'L. M. Montgomery', 344, true);
+const book17 = new Book(
+  "The Hitchhiker's Guide to the Galaxy",
+  'Douglas Adams',
+  550,
+  false
+);
+const book18 = new Book("Ender's Game", 'Orson Scott Card', 263, false);
+const book19 = new Book("Charlotte's Web", 'E.B. White', 344, true);
+const book20 = new Book('The Alchemist', 'Poulo Coelho', 550, false);
+const book21 = new Book('The Catcher in the Rye', 'J.D. Salinger', 263, false);
+
+book1.addToLibrary();
+book2.addToLibrary();
+book3.addToLibrary();
+book4.addToLibrary();
+book5.addToLibrary();
+book6.addToLibrary();
+book7.addToLibrary();
+book8.addToLibrary();
+book9.addToLibrary();
+book10.addToLibrary();
+book11.addToLibrary();
+book12.addToLibrary();
+book13.addToLibrary();
+book14.addToLibrary();
+book15.addToLibrary();
+book16.addToLibrary();
+book17.addToLibrary();
+book18.addToLibrary();
+book19.addToLibrary();
+book20.addToLibrary();
+book21.addToLibrary();
+
+displayLibrary();

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Library</title>
+<script defer src="index.js"></script></head>
+
+<body>
+  <div class="content-container">
+    <main>
+      <header>
+        <img class="logo" src="22fffab6929c32781005.svg" alt="">
+        <h1>
+          My Library
+        </h1>
+        <div>
+          <img class="addBookImg" src="7935ae774ff0902ba7d1.png" alt="">
+        </div>
+      </header>
+      <table>
+        <tbody>
+          <thead>
+            <tr>
+              <th>Title
+                <img class="sort-img" id="sort-title" src="762798dc93b7f81e5c5e.png" alt="">
+              </th>
+              <th>Author
+                <img class="sort-img" id="sort-author" src="762798dc93b7f81e5c5e.png" alt="">
+              </th>
+              <th>Pages
+                <img class="sort-img" id="sort-pages" src="762798dc93b7f81e5c5e.png" alt="">
+              </th>
+              <th>Read
+                <img class="sort-img" id="sort-read" src="762798dc93b7f81e5c5e.png" alt="">
+              </th>
+              <th>&nbsp</th>
+            </tr>
+          </thead>
+          <!-- library table goes here -->
+        </tbody>
+      </table>
+      <div class="care">Please help to take care of our books. Thank you!</div>
+    </main>
+
+    <dialog id="book-form">
+      <form>
+        <div class="book-form-header">
+          <div class="book-form-title">Book details</div>
+          <div class="book-form-close">&times;</div>
+        </div>
+        <fieldset>
+          <div class="entry-line">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required minlength="1">
+          </div>
+          <div class="entry-line">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" required minlength="3">
+          </div>
+          <div class="entry-line">
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" id="pages" required min="1">
+          </div>
+          <div class="entry-line">
+            <label for="read">Read</label>
+            <input type="checkbox" name="read" id="read">
+          </div>
+        </fieldset>
+        <div class="button-container">
+          <button id="resetBtn" type="reset">Reset</button>
+          <button id="addBookBtn" type="submit">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="delete-alert">
+      <div class="delete-alert-container">
+        <img src="6754905c29724abc9082.png" alt="">
+        <p>Please confirm that you'd like to delete the book <span id="book-title"></span></p>
+      </div>
+      <div class="button-container">
+        <button id="delete-cancel">Cancel</button>
+        <button id="delete-confirm">Confirm</button>
+      </div>
+    </dialog>
+
+
+    <footer>Copyright &copy; sawfiz@github</footer>
+  </div>
+  <div class="overlay"></div>
+  <script src="137c3a081ffd45d11b04.js"></script>
+</body>
+
+</html>

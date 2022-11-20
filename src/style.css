@@ -140,47 +140,12 @@ td {
   border-bottom: 2px dashed #ddd;
 }
 
-/*  */
-/* modal */
-.modal {
-  /* visibility: hidden; */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  border: 1px solid #000;
-  border-radius: 10px;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-  transition: ease-in-out 0.5s;
-  z-index: 10;
-}
-
-.modal.active {
-  visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
-  scale: 1;
-}
-
-.overlay {
-  opacity: 0.3;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  pointer-events: none;
-  transition: 0.5s ease-in-out;
-}
-
-.overlay.active {
-  background-color: black;
-  opacity: 0.5;
-  pointer-events: all;
-}
-
-/*  */
 /* Form */
 #book-form {
   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 480px;
   background: #9ab3a0;
   padding: 1rem;
@@ -258,9 +223,11 @@ button:hover {
   scale: 1.1;
 }
 
-/*  */
 /* Delete confirmation popup */
 #delete-alert {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 410px;
   background-color: #ee7c78;
   padding: 1rem 1rem 0 1rem;
