@@ -1,4 +1,4 @@
-import bookFactory from './book';
+import bookFactory from './Book';
 import controller from './controller';
 // import view from './view';
 
@@ -35,7 +35,8 @@ const modals = (() => {
       'click',
       (e) => {
         e.preventDefault();
-        if (book === undefined) { // Adding a new book
+        if (book === undefined) {
+          // Adding a new book
           if (
             titleEl.value.length >= 1 &&
             authorEl.value.length >= 1 &&
@@ -50,7 +51,8 @@ const modals = (() => {
             );
             controller.addBook(newBook);
           }
-        } else { // Editing an existing book
+        } else {
+          // Editing an existing book
           book.title = titleEl.value;
           book.author = authorEl.value;
           book.pages = pagesEl.value;
@@ -59,7 +61,7 @@ const modals = (() => {
         formEl.close();
         // * I do not really need to do this.
         // * I can just call view.displayBookList() here
-        controller.updateBook();  
+        controller.updateBook();
       },
       { once: true } // !Fire this event listener only once since it is in a function
     );

@@ -1,16 +1,15 @@
-import library from './Library';
-import controller from './controller';
-
+import createElement from './createElement';
 import readIcon from './images/icons8-checked-checkbox-96.png';
 import readingIcon from './images/icons8-process-96.png';
 import editIcon from './images/icons8-compose-96.png';
 import deleteIcon from './images/remove.png';
-import modals from './modals';
 
-const view = (() => {
-  const tableBodyEl = document.querySelector('tbody');
+const BookDisplay = (() => {
+  let displayEl = null;
 
-  function displayBook(book) {
+  function displayBook(book, index) {
+    console.log(book, index);
+
     const bookRow = document.createElement('tr');
 
     const bookTitle = document.createElement('td');
@@ -26,49 +25,53 @@ const view = (() => {
     bookRow.appendChild(bookPages);
 
     const bookRead = document.createElement('td');
+    bookRead.setAttribute('data-key', index);
     const bookReadImg = document.createElement('img');
     bookReadImg.classList.add('read-status');
     bookRead.appendChild(bookReadImg);
-    bookReadImg.src = book.isRead ? readIcon : readingIcon;
+    bookReadImg.src = book.read ? readIcon : readingIcon;
     bookRow.appendChild(bookRead);
 
-    // Toggle book read status and icon image when the icon is clicked on
-    bookReadImg.addEventListener('click', () => {
-      book.toggleRead();
-    });
-
     const bookEdit = document.createElement('td');
+    bookEdit.setAttribute('data-key', index);
 
     const bookEditImg = document.createElement('img');
+    bookEditImg.classList.add('edit-btn');
     bookEditImg.src = editIcon;
     bookEdit.appendChild(bookEditImg);
 
     const bookRemoveImg = document.createElement('img');
+    bookRemoveImg.classList.add('del-btn');
     bookRemoveImg.src = deleteIcon;
     bookEdit.appendChild(bookRemoveImg);
 
     bookRow.appendChild(bookEdit);
 
-    bookEditImg.addEventListener('click', () => {
-      modals.openBookModal(book);
-    });
-
-    bookRemoveImg.addEventListener('click', () => {
-      modals.openDeleteModal(book);
-    });
-
-    tableBodyEl.appendChild(bookRow);
+    displayEl.appendChild(bookRow);
   }
 
-  function displayBookList() {
-    tableBodyEl.innerHTML = '';
-    library.forEach((book) => {
-      displayBook(book);
-    });
-    console.log(library);
+  function clear() {
+    displayEl.innerText = '';
   }
 
-  return { displayBookList };
+  function render(books) {
+    clear();
+    console.log(books);
+    console.log(displayEl);
+    books.forEach((book) => {
+      displayBook(book, books.indexOf(book));
+    });
+  }
+
+  return {
+    render,
+    get displayEl() {
+      return displayEl;
+    },
+    set displayEl(el) {
+      displayEl = el;
+    },
+  };
 })();
 
-export default view;
+export default BookDisplay;

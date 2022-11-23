@@ -1,4 +1,4 @@
-import library from './library';
+import library from './Library';
 import view from './view';
 
 const controller = (() => {
