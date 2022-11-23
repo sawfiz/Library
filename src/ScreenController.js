@@ -2,9 +2,8 @@ import Library from './Library';
 import BookDisplay from './BookDisplay';
 
 const ScreenController = ((library, display) => {
-  function init(libraryEl) {
+  function init() {
     // Event listener for the buttons in the book list
-    display.displayEl = libraryEl;
     library.getFromLocalStorage();
     BookDisplay.render(library.books);
     display.displayEl.addEventListener('click', editBook);
@@ -14,29 +13,12 @@ const ScreenController = ((library, display) => {
     addBookImgEl.addEventListener('click', addBook);
 
     // Event listeners for the sort buttons
-    const sortTitleEl = document.querySelector('#sort-title');
-    const sortAuthorEl = document.querySelector('#sort-author');
-    const sortPagesEl = document.querySelector('#sort-pages');
-    const sortReadEl = document.querySelector('#sort-read');
-
-    sortTitleEl.addEventListener('click', () => {
-      library.sortBooks('title');
-      display.render(library.books);
-    });
-
-    sortAuthorEl.addEventListener('click', () => {
-      library.sortBooks('author');
-      display.render(library.books);
-    });
-
-    sortPagesEl.addEventListener('click', () => {
-      library.sortBooks('pages');
-      display.render(library.books);
-    });
-
-    sortReadEl.addEventListener('click', () => {
-      library.sortBooks('read');
-      display.render(library.books);
+    const sortBtns = Array.from(document.querySelectorAll('.sort-img'));
+    sortBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        library.sortBooks(btn.getAttribute('data-key'));
+        display.render(library.books);
+      });
     });
   }
 

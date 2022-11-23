@@ -11,19 +11,14 @@ const Library = (() => {
   function getFromLocalStorage() {
     const jsonArray = JSON.parse(localStorage.getItem('myLibrary'));
     if (!jsonArray || jsonArray.length === 0) {
+      // If array is empty, populate it with a few books
       addBook('Lord of the Rings', 'J. R. R.Tolkin', 9250, true);
       addBook('A Game of Thrones', 'George R. R. Martin', 694, false);
-      addBook(
-        'Harry Potter and the Deathly Hallows',
-        'J. K. Rowling',
-        607,
-        false
-      );
-      return;
+      addBook('Harry Potter', 'J. K. Rowling', 607, false);
     }
 
     // Convert jasonArray into a list of Book objects
-    // The Book objects have methods in addition to properties
+    // because Book objects have methods in addition to properties
     // Then push each Book object into the const library
     library.push(
       ...jsonArray.map((jsonBook) =>
@@ -57,6 +52,7 @@ const Library = (() => {
     saveToLocalStorage();
   }
 
+  // Sorting functions
   let sortTitleAscend = true;
   let sortAuthorAscend = true;
   let sortPagesAscend = true;
@@ -112,7 +108,7 @@ const Library = (() => {
     getFromLocalStorage,
     saveToLocalStorage,
     // ? What is difference between using get and access library[]
-    // Even if you froze the object, the array could still be modified.
+    // Even if you freeze the object, the array could still be modified.
     // Even if you used a getter- the array could still be modified if you aren't careful!
     // To protect the array, you can use a getter function that only ever returns
     // a copy of the array (hence a different area in memory,

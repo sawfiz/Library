@@ -5,7 +5,8 @@ import editIcon from './images/icons8-compose-96.png';
 import deleteIcon from './images/remove.png';
 
 const BookDisplay = (() => {
-  let displayEl = null;
+  const displayEl = document.querySelector('tbody');
+  // let displayEl = null;
 
   function displayBook(book, index) {
     console.log(book, index);
@@ -68,9 +69,9 @@ const BookDisplay = (() => {
     get displayEl() {
       return displayEl;
     },
-    set displayEl(el) {
-      displayEl = el;
-    },
+    // set displayEl(el) {
+    //   displayEl = el;
+    // },
   };
 })();
 
