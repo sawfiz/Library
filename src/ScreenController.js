@@ -58,15 +58,15 @@ const ScreenController = ((library, display) => {
 
   function editBook(e) {
     if (e.target.className === 'read-status') {
-      const index = e.target.parentElement.getAttribute('data-key');
+      const index = e.target.getAttribute('data-key');
       library.toggleBook(index);
       display.render(library.books);
     } else if (e.target.className === 'del-btn') {
-      const index = e.target.parentElement.getAttribute('data-key');
+      const index = e.target.getAttribute('data-key');
       library.delBook(index);
       display.render(library.books);
     } else if (e.target.className === 'edit-btn') {
-      const index = e.target.parentElement.getAttribute('data-key');
+      const index = e.target.getAttribute('data-key');
       const book = library.books[index];
 
       formEl.showModal();

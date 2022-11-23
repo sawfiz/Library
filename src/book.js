@@ -16,9 +16,7 @@ const Book = (title, author, pages, read) => ({
   // It toggles the value of read in the function,
   // but does not toggle the value of read in the object
   toggleRead() {
-    console.log(read);
     read = !read;
-    console.log(read);
   },
 });
 

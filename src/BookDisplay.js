@@ -6,11 +6,8 @@ import deleteIcon from './images/remove.png';
 
 const BookDisplay = (() => {
   const displayEl = document.querySelector('tbody');
-  // let displayEl = null;
 
   function displayBook(book, index) {
-    console.log(book, index);
-
     const bookRow = document.createElement('tr');
 
     const bookTitle = document.createElement('td');
@@ -26,23 +23,23 @@ const BookDisplay = (() => {
     bookRow.appendChild(bookPages);
 
     const bookRead = document.createElement('td');
-    bookRead.setAttribute('data-key', index);
-    const bookReadImg = document.createElement('img');
-    bookReadImg.classList.add('read-status');
+    const bookReadImg = createElement('img', ['read-status'], {
+      'data-key': index,
+    });
     bookRead.appendChild(bookReadImg);
     bookReadImg.src = book.read ? readIcon : readingIcon;
     bookRow.appendChild(bookRead);
 
     const bookEdit = document.createElement('td');
-    bookEdit.setAttribute('data-key', index);
-
-    const bookEditImg = document.createElement('img');
-    bookEditImg.classList.add('edit-btn');
+    const bookEditImg = createElement('img', ['edit-btn'], {
+      'data-key': index,
+    });
     bookEditImg.src = editIcon;
     bookEdit.appendChild(bookEditImg);
 
-    const bookRemoveImg = document.createElement('img');
-    bookRemoveImg.classList.add('del-btn');
+    const bookRemoveImg = createElement('img', ['del-btn'], {
+      'data-key': index,
+    });
     bookRemoveImg.src = deleteIcon;
     bookEdit.appendChild(bookRemoveImg);
 
@@ -50,15 +47,9 @@ const BookDisplay = (() => {
 
     displayEl.appendChild(bookRow);
   }
-
-  function clear() {
-    displayEl.innerText = '';
-  }
-
+  
   function render(books) {
-    clear();
-    console.log(books);
-    console.log(displayEl);
+    displayEl.innerText = '';
     books.forEach((book) => {
       displayBook(book, books.indexOf(book));
     });
@@ -69,9 +60,6 @@ const BookDisplay = (() => {
     get displayEl() {
       return displayEl;
     },
-    // set displayEl(el) {
-    //   displayEl = el;
-    // },
   };
 })();
 
