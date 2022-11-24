@@ -2,26 +2,6 @@ import Library from './Library';
 import BookDisplay from './BookDisplay';
 
 const ScreenController = ((library, display) => {
-  function init() {
-    // Event listener for the buttons in the book list
-    library.getFromLocalStorage();
-    BookDisplay.render(library.books);
-    display.displayEl.addEventListener('click', editBook);
-
-    // Event listner for the add book button
-    const addBookImgEl = document.querySelector('.addBookImg');
-    addBookImgEl.addEventListener('click', addBook);
-
-    // Event listeners for the sort buttons
-    const sortBtns = Array.from(document.querySelectorAll('.sort-img'));
-    sortBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        library.sortBooks(btn.getAttribute('data-key'));
-        display.render(library.books);
-      });
-    });
-  }
-
   // Book details form elements
   const formEl = document.querySelector('#book-form');
   const titleEl = document.querySelector('#title');
@@ -29,6 +9,7 @@ const ScreenController = ((library, display) => {
   const pagesEl = document.querySelector('#pages');
   const readEl = document.querySelector('#read');
 
+  // Clear form input fields
   function clearInputs() {
     titleEl.value = '';
     authorEl.value = '';
@@ -36,27 +17,46 @@ const ScreenController = ((library, display) => {
     readEl.checked = false;
   }
 
-  function addBook() {
-    formEl.showModal();
-    clearInputs();
-    formEl.addEventListener(
-      'submit',
-      (e) => {
-        e.preventDefault();
-        library.addBook(
-          titleEl.value,
-          authorEl.value,
-          pagesEl.value,
-          readEl.checked
-        );
-        formEl.close();
-        display.render(library.books);
-      },
-      { once: true }
+  function addBook(e) {
+    e.preventDefault();
+    library.addBook(
+      titleEl.value,
+      authorEl.value,
+      pagesEl.value,
+      readEl.checked
     );
+    formEl.close();
+    display.render(library.books);
   }
 
-  function editBook(e) {
+  function openAddBookModal() {
+    formEl.showModal();
+    clearInputs();
+    formEl.addEventListener('submit', addBook, { once: true });
+  }
+
+  function sortBooks(e) {
+    if (e.target.className === 'sort-img') {
+      const sortKey = e.target.getAttribute('data-key');
+      library.sortBooks(sortKey);
+      display.render(library.books);
+    }
+  }
+
+  function updateBook(e, index) {
+    e.preventDefault();
+    library.updateBook(
+      index,
+      titleEl.value,
+      authorEl.value,
+      pagesEl.value,
+      readEl.checked
+    );
+    formEl.close();
+    display.render(library.books);
+  }
+
+  function modifyBook(e) {
     if (e.target.className === 'read-status') {
       const index = e.target.getAttribute('data-key');
       library.toggleBook(index);
@@ -70,28 +70,31 @@ const ScreenController = ((library, display) => {
       const book = library.books[index];
 
       formEl.showModal();
+      // Fill the form with selected book details
       titleEl.value = book.title;
       authorEl.value = book.author;
       pagesEl.value = book.pages;
       readEl.checked = book.read;
 
-      formEl.addEventListener(
-        'submit',
-        (e) => {
-          e.preventDefault();
-          library.updateBook(
-            index,
-            titleEl.value,
-            authorEl.value,
-            pagesEl.value,
-            readEl.checked
-          );
-          formEl.close();
-          display.render(library.books);
-        },
-        { once: true }
-      );
+      formEl.addEventListener('submit', (evt) => updateBook(evt, index), {
+        once: true,
+      });
     }
+  }
+
+  function init() {
+    // Event listner for the add book button
+    const addBookImgEl = document.querySelector('.addBookImg');
+    addBookImgEl.addEventListener('click', openAddBookModal);
+
+    // Event listeners for the sort buttons in the table head
+    const theadEl = document.querySelector('thead');
+    theadEl.addEventListener('click', sortBooks);
+
+    // Event listener for the buttons in the book list
+    library.getFromLocalStorage();
+    BookDisplay.render(library.books);
+    display.displayEl.addEventListener('click', modifyBook);
   }
 
   return { init };
