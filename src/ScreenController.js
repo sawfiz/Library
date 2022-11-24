@@ -8,6 +8,14 @@ const ScreenController = ((library, display) => {
   const authorEl = document.querySelector('#author');
   const pagesEl = document.querySelector('#pages');
   const readEl = document.querySelector('#read');
+  const bookFormCloseBtn = document.querySelector('.book-form-close');
+  bookFormCloseBtn.addEventListener('click', () => formEl.close());
+
+  // Delete confirmation modal elements
+  const delAlertEl = document.querySelector('#delete-alert');
+  const delCancelBtn = document.querySelector('#delete-cancel');
+  delCancelBtn.addEventListener('click', () => delAlertEl.close());
+  const delConfirmBtn = document.querySelector('#delete-confirm');
 
   // Clear form input fields
   function clearInputs() {
@@ -56,6 +64,19 @@ const ScreenController = ((library, display) => {
     display.render(library.books);
   }
 
+  function showDelModal(index) {
+    delAlertEl.showModal();
+    delConfirmBtn.addEventListener(
+      'click',
+      () => {
+        library.delBook(index);
+        delAlertEl.close();
+        display.render(library.books);
+      },
+      { once: true }
+    );
+  }
+
   function modifyBook(e) {
     if (e.target.className === 'read-status') {
       const index = e.target.getAttribute('data-key');
@@ -63,8 +84,7 @@ const ScreenController = ((library, display) => {
       display.render(library.books);
     } else if (e.target.className === 'del-btn') {
       const index = e.target.getAttribute('data-key');
-      library.delBook(index);
-      display.render(library.books);
+      showDelModal(index);
     } else if (e.target.className === 'edit-btn') {
       const index = e.target.getAttribute('data-key');
       const book = library.books[index];
