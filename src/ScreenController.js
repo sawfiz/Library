@@ -64,17 +64,17 @@ const ScreenController = ((library, display) => {
     display.render(library.books);
   }
 
+  function deleteBook(index) {
+    library.delBook(index);
+    delAlertEl.close();
+    display.render(library.books);
+  }
+
   function showDelModal(index) {
     delAlertEl.showModal();
-    delConfirmBtn.addEventListener(
-      'click',
-      () => {
-        library.delBook(index);
-        delAlertEl.close();
-        display.render(library.books);
-      },
-      { once: true }
-    );
+    const booktitleEl = document.querySelector('#book-title');
+    booktitleEl.innerText = library.books[index].title;
+    delConfirmBtn.addEventListener('click', deleteBook, { once: true });
   }
 
   function modifyBook(e) {
