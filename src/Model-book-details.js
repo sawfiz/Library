@@ -2,7 +2,7 @@ import createElement from './createElement';
 
 const bookModal = (() => {
   const modalEl = createElement('dialog', [], { id: 'book-form' });
-  const form = createElement('form', [], {});
+  const form = createElement('form', [], {id: 'book-details-form'});
   modalEl.appendChild(form);
 
   // Form header

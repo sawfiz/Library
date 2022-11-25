@@ -81,20 +81,17 @@ const ScreenController = ((library, display) => {
       const index = e.target.getAttribute('data-key');
       const book = library.books[index];
 
-      // formEl.showModal();
       bookModal.modalEl.showModal();
 
       // Book details form elements
-      const titleEl = document.querySelector('#title');
-      const authorEl = document.querySelector('#author');
-      const pagesEl = document.querySelector('#pages');
-      const readEl = document.querySelector('#read');
+      const formEl = document.querySelector('#book-details-form');
+      const formElems = formEl.elements;
 
       // Fill the form with selected book details
-      titleEl.value = book.title;
-      authorEl.value = book.author;
-      pagesEl.value = book.pages;
-      readEl.checked = book.read;
+      formElems.title.value = book.title;
+      formElems.author.value = book.author;
+      formElems.pages.value = book.pages;
+      formElems.read.checked = book.read;
 
       bookModal.modalEl.addEventListener(
         'submit',
