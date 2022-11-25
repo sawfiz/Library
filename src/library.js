@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import Book from './Book';
 
 // Library is an object that includes the library array and the associated methods

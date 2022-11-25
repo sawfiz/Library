@@ -1,46 +1,50 @@
 import Library from './Library';
 import BookDisplay from './BookDisplay';
+import deleteModal from './Modal-delete';
+import bookModal from './Model-book-details';
 
 const ScreenController = ((library, display) => {
-  // Book details form elements
-  const formEl = document.querySelector('#book-form');
-  const titleEl = document.querySelector('#title');
-  const authorEl = document.querySelector('#author');
-  const pagesEl = document.querySelector('#pages');
-  const readEl = document.querySelector('#read');
-  const bookFormCloseBtn = document.querySelector('.book-form-close');
-  bookFormCloseBtn.addEventListener('click', () => formEl.close());
+  const contentContainerEl = document.querySelector('.content-container');
 
-  // Delete confirmation modal elements
-  const delAlertEl = document.querySelector('#delete-alert');
-  const delCancelBtn = document.querySelector('#delete-cancel');
-  delCancelBtn.addEventListener('click', () => delAlertEl.close());
+  // Append the modals
+  contentContainerEl.appendChild(deleteModal.modalEl);
+  contentContainerEl.appendChild(bookModal.modalEl);
+
+  // Delete confirmation modal buttons event listeners
   const delConfirmBtn = document.querySelector('#delete-confirm');
 
-  // Clear form input fields
-  function clearInputs() {
-    titleEl.value = '';
-    authorEl.value = '';
-    pagesEl.value = null;
-    readEl.checked = false;
+  function deleteBook(e, index) {
+    library.delBook(index);
+    deleteModal.modalEl.close();
+    display.render(library.books);
+  }
+
+  function showDelModal(index) {
+    deleteModal.modalEl.showModal();
+    const booktitleEl = document.querySelector('#book-title');
+    booktitleEl.innerText = library.books[index].title;
+    delConfirmBtn.addEventListener('click', (evt) => deleteBook(evt, index), {
+      once: true,
+    });
   }
 
   function addBook(e) {
     e.preventDefault();
+    const formElems = e.target.elements;
     library.addBook(
-      titleEl.value,
-      authorEl.value,
-      pagesEl.value,
-      readEl.checked
+      formElems.title.value,
+      formElems.author.value,
+      formElems.pages.value,
+      formElems.read.checked
     );
-    formEl.close();
+    bookModal.modalEl.close();
     display.render(library.books);
   }
 
   function openAddBookModal() {
-    formEl.showModal();
-    clearInputs();
-    formEl.addEventListener('submit', addBook, { once: true });
+    bookModal.modalEl.showModal();
+    bookModal.clearInputs();
+    bookModal.modalEl.addEventListener('submit', addBook, { once: true });
   }
 
   function sortBooks(e) {
@@ -53,28 +57,16 @@ const ScreenController = ((library, display) => {
 
   function updateBook(e, index) {
     e.preventDefault();
+    const formElems = e.target.elements;
     library.updateBook(
       index,
-      titleEl.value,
-      authorEl.value,
-      pagesEl.value,
-      readEl.checked
+      formElems.title.value,
+      formElems.author.value,
+      formElems.pages.value,
+      formElems.read.checked
     );
-    formEl.close();
+    bookModal.modalEl.close();
     display.render(library.books);
-  }
-
-  function deleteBook(index) {
-    library.delBook(index);
-    delAlertEl.close();
-    display.render(library.books);
-  }
-
-  function showDelModal(index) {
-    delAlertEl.showModal();
-    const booktitleEl = document.querySelector('#book-title');
-    booktitleEl.innerText = library.books[index].title;
-    delConfirmBtn.addEventListener('click', deleteBook, { once: true });
   }
 
   function modifyBook(e) {
@@ -89,16 +81,28 @@ const ScreenController = ((library, display) => {
       const index = e.target.getAttribute('data-key');
       const book = library.books[index];
 
-      formEl.showModal();
+      // formEl.showModal();
+      bookModal.modalEl.showModal();
+
+      // Book details form elements
+      const titleEl = document.querySelector('#title');
+      const authorEl = document.querySelector('#author');
+      const pagesEl = document.querySelector('#pages');
+      const readEl = document.querySelector('#read');
+
       // Fill the form with selected book details
       titleEl.value = book.title;
       authorEl.value = book.author;
       pagesEl.value = book.pages;
       readEl.checked = book.read;
 
-      formEl.addEventListener('submit', (evt) => updateBook(evt, index), {
-        once: true,
-      });
+      bookModal.modalEl.addEventListener(
+        'submit',
+        (evt) => updateBook(evt, index),
+        {
+          once: true,
+        }
+      );
     }
   }
 
